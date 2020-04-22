@@ -1,0 +1,1 @@
+# Node.js, PostgreSQL, React and Redux Smart Store Dashboard
