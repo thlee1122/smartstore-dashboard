@@ -1,8 +1,10 @@
 const express = require('express');
+const cors = require('cors');
 const productRouter = require('./api/product');
 
 const app = express();
 
+app.use(cors({ origin: 'http://localhost:1234' }));
 app.use('/product', productRouter);
 
 app.use((err, req, res, next) => {
