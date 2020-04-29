@@ -22,6 +22,27 @@ class ProductTable {
 			)
 		});
 	}
+
+
+
+	static deleteProduct(productId) {
+		return new Promise((resolve, reject) => {
+			pool.query(
+				`DELETE FROM product
+				WHERE id = $1`,
+        [productId],
+        (error, response) => {
+        	if(error) return reject(error);
+
+        	// const productId = response.rows[0].id;
+
+        	resolve({ productId });
+        }
+			)
+		});
+	}
+
+	
 	
 
 	static getAllProducts() {

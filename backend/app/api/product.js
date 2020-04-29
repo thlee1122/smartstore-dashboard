@@ -5,6 +5,16 @@ const Product = require('../product');
 
 const router = new Router();
 
+router.delete('/delete/product', (req, res, next) => {
+	console.log("~~~~~ req.body", req.body);
+
+	const { productId } = req.body;
+
+	ProductTable.deleteProduct(productId)
+		.then(() => res.json({ message: 'Successfully deleted the product.' }))
+    .catch(error => next(error));
+});
+
 router.post('/newest', (req, res, next) => {
 	console.log("~~~~~ req.body", req.body);
 	// console.log("11111 req", req);
