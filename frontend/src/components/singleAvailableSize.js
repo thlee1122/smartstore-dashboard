@@ -1,5 +1,5 @@
-import React, { useState, useEffect }             from 'react';
-import Button from '@material-ui/core/Button';
+import React, { useState, useEffect }       from 'react';
+import Button 															from '@material-ui/core/Button';
 
 const SingleAvailableSize = (props) => {
 	const {size} = props;
@@ -7,20 +7,14 @@ const SingleAvailableSize = (props) => {
 
 	const handleButtonClick = () => {
 		setButtonClick(!buttonClicked);
-
-		console.log("~~~~ props", props);
-
 		props.collectAvailableSizes(props.size);
 	}
 
-			let backgroundColor = buttonClicked === false ? 'white' : '#e0e0e0';
-			// console.log("buttonClicked", buttonClicked);
-			// console.log("backgroundColor", backgroundColor);
+	let backgroundColor = buttonClicked === false ? 'white' : '#e0e0e0';
 
 	return (
-
-			<Button 
-			// key={index}
+		<Button 
+			disabled={props.disabled}
 			variant="contained"
 			onClick={handleButtonClick}
 			style={{

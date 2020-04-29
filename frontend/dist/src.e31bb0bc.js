@@ -31691,7 +31691,7 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.PRODUCT_LIST = exports.PRODUCT = void 0;
+exports.PRODUCT_DELETE = exports.PRODUCT_LIST = exports.PRODUCT = void 0;
 var PRODUCT = {
   FETCH: 'PRODUCT_FETCH',
   FETCH_ERROR: 'PRODUCT_FETCH_ERROR',
@@ -31701,14 +31701,20 @@ exports.PRODUCT = PRODUCT;
 var PRODUCT_LIST = {
   FETCH: 'PRODUCT_LIST_FETCH',
   FETCH_ERROR: 'PRODUCT_LIST_FETCH_ERROR',
-  FETCH_SUCCESS: 'PRODUCT_LIST_FETCH_SUCCESS' // const DRAGON = {
+  FETCH_SUCCESS: 'PRODUCT_LIST_FETCH_SUCCESS'
+};
+exports.PRODUCT_LIST = PRODUCT_LIST;
+var PRODUCT_DELETE = {
+  DELETE: 'PRODUCT_DELETE',
+  DELETE_ERROR: 'PRODUCT_DELETE_ERROR',
+  DELETE_SUCCESS: 'PRODUCT_DELETE_SUCCESS' // const DRAGON = {
   // 	FETCH: 'DRAGON_FETCH',
   // 	FETCH_ERROR: 'DRAGON_FETCH_ERROR',
   // 	FETCH_SUCCESS: 'DRAGON_FETCH_SUCCESS'
   // };
 
 };
-exports.PRODUCT_LIST = PRODUCT_LIST;
+exports.PRODUCT_DELETE = PRODUCT_DELETE;
 },{}],"config.js":[function(require,module,exports) {
 "use strict";
 
@@ -31850,34 +31856,60 @@ var postNewProduct = function postNewProduct(newProduct) {
       });
     });
   };
-}; // postProduct = () => {
-// 		console.log("@@@@ got here this.props", this.props);
-// 		const product = {
-// 			brand: 'Adidas',
-// 			productName: 'Adidas Air Force 1 React',
-// 			price: 130.99,
-// 			lowSize: 5.5,
-// 			highSize: 15,
-// 			siteName: 'nike',
-// 			availableSizes: [3, 4, 5, 6, 7, 8.5, 9],
-// 			url: 'https://www.nike.com/t/air-force-1-react-mens-shoe-gW29tK/CD4366-100',
-// 			shippingFee: 10.5
-// 		};
-// 		fetch(`${BACKEND.ADDRESS}/product/newest`, {
-// 			method: 'POST',
-// 			// credentials: 'include',
-// 			headers: { 'Content-Type': 'application/json' },
-// 			body: JSON.stringify({ newProduct: product })
-// 		}).then(response => console.log(response.json()))
-// 			.then(json => {
-// 				alert(json.message);
-// 			})
-// 			.catch(error => alert(error.message));
-// 		// this.props.postNewProduct(product);
-// 	}
-
+};
 
 exports.postNewProduct = postNewProduct;
+},{"./types":"actions/types.js","../config":"config.js"}],"actions/deleteProduct.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.deleteProduct = void 0;
+
+var _types = require("./types");
+
+var _config = require("../config");
+
+var deleteProduct = function deleteProduct(productId) {
+  return function (dispatch) {
+    // console.log('inside postNewProduct', newProduct);
+    dispatch({
+      type: _types.PRODUCT_DELETE.DELETE
+    });
+    return fetch("".concat(_config.BACKEND.ADDRESS, "/product/delete/product"), {
+      method: 'DELETE',
+      // credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        productId: productId
+      })
+    }).then(function (response) {
+      return response.json();
+    }).then(function (json) {
+      if (json.type === 'error') {
+        dispatch({
+          type: _types.PRODUCT_DELETE.DELETE_ERROR,
+          message: json.message
+        });
+      } else {
+        dispatch({
+          type: _types.PRODUCT_DELETE.DELETE_SUCCESS,
+          deletedProduct: json.message
+        });
+      }
+    }).catch(function (error) {
+      return dispatch({
+        type: _types.PRODUCT_DELETE.DELETE_ERROR,
+        message: error.message
+      });
+    });
+  };
+};
+
+exports.deleteProduct = deleteProduct;
 },{"./types":"actions/types.js","../config":"config.js"}],"../node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js":[function(require,module,exports) {
 "use strict";
 
@@ -57385,15 +57417,12 @@ var SingleAvailableSize = function SingleAvailableSize(props) {
 
   var handleButtonClick = function handleButtonClick() {
     setButtonClick(!buttonClicked);
-    console.log("~~~~ props", props);
     props.collectAvailableSizes(props.size);
   };
 
-  var backgroundColor = buttonClicked === false ? 'white' : '#e0e0e0'; // console.log("buttonClicked", buttonClicked);
-  // console.log("backgroundColor", backgroundColor);
-
-  return _react.default.createElement(_Button.default // key={index}
-  , {
+  var backgroundColor = buttonClicked === false ? 'white' : '#e0e0e0';
+  return _react.default.createElement(_Button.default, {
+    disabled: props.disabled,
     variant: "contained",
     onClick: handleButtonClick,
     style: {
@@ -57407,7 +57436,7 @@ var SingleAvailableSize = function SingleAvailableSize(props) {
 
 var _default = SingleAvailableSize;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","@material-ui/core/Button":"../node_modules/@material-ui/core/esm/Button/index.js"}],"components/product.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","@material-ui/core/Button":"../node_modules/@material-ui/core/esm/Button/index.js"}],"components/siteName.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -57417,27 +57446,197 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _reactRedux = require("react-redux");
-
-var _product = require("../actions/product");
-
-var _productList = require("../actions/productList");
-
-var _newProduct = require("../actions/newProduct");
-
-var _Button = _interopRequireDefault(require("@material-ui/core/Button"));
-
 var _TextField = _interopRequireDefault(require("@material-ui/core/TextField"));
-
-var _InputAdornment = _interopRequireDefault(require("@material-ui/core/InputAdornment"));
 
 var _MenuItem = _interopRequireDefault(require("@material-ui/core/MenuItem"));
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var SiteName = function SiteName(props) {
+  var siteNames = ["Nike", "Adidas", "Goat"];
+
+  var _useState = (0, _react.useState)('Nike'),
+      _useState2 = _slicedToArray(_useState, 2),
+      siteName = _useState2[0],
+      setSiteName = _useState2[1];
+
+  var handleSiteNameChange = function handleSiteNameChange(event) {
+    props.setProductInfo("Site Name", event.target.value);
+    setSiteName(event.target.value);
+  };
+
+  return _react.default.createElement(_TextField.default, {
+    select: true,
+    label: "Site Name",
+    variant: "outlined",
+    value: siteName,
+    onChange: handleSiteNameChange,
+    helperText: "Please select name of the site"
+  }, siteNames.map(function (siteName) {
+    return _react.default.createElement(_MenuItem.default, {
+      key: siteName,
+      value: siteName
+    }, siteName);
+  }));
+};
+
+var _default = SiteName;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","@material-ui/core/TextField":"../node_modules/@material-ui/core/esm/TextField/index.js","@material-ui/core/MenuItem":"../node_modules/@material-ui/core/esm/MenuItem/index.js"}],"components/lowestSize.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _TextField = _interopRequireDefault(require("@material-ui/core/TextField"));
+
+var _MenuItem = _interopRequireDefault(require("@material-ui/core/MenuItem"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var LowestSize = function LowestSize(props) {
+  var _useState = (0, _react.useState)(3),
+      _useState2 = _slicedToArray(_useState, 2),
+      lowestSize = _useState2[0],
+      setLowestSize = _useState2[1];
+
+  var handleLowestSizeChange = function handleLowestSizeChange(event) {
+    props.setProductInfo("Lowest Size", event.target.value);
+    setLowestSize(event.target.value);
+  };
+
+  return _react.default.createElement(_TextField.default, {
+    select: true,
+    label: "Lowest Size",
+    variant: "outlined",
+    value: lowestSize,
+    onChange: handleLowestSizeChange,
+    helperText: "Please select LOWEST size of your product",
+    style: {
+      width: '170px'
+    }
+  }, props.sizes.map(function (size) {
+    return _react.default.createElement(_MenuItem.default, {
+      key: size,
+      value: size
+    }, size);
+  }));
+};
+
+var _default = LowestSize;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","@material-ui/core/TextField":"../node_modules/@material-ui/core/esm/TextField/index.js","@material-ui/core/MenuItem":"../node_modules/@material-ui/core/esm/MenuItem/index.js"}],"components/highestSize.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _TextField = _interopRequireDefault(require("@material-ui/core/TextField"));
+
+var _MenuItem = _interopRequireDefault(require("@material-ui/core/MenuItem"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var HighestSize = function HighestSize(props) {
+  var _useState = (0, _react.useState)(15),
+      _useState2 = _slicedToArray(_useState, 2),
+      highestSize = _useState2[0],
+      setHighestSize = _useState2[1];
+
+  var handleHighestSizeChange = function handleHighestSizeChange(event) {
+    props.setProductInfo("Highest Size", event.target.value);
+    setHighestSize(event.target.value);
+  };
+
+  return _react.default.createElement(_TextField.default, {
+    select: true,
+    label: "Highest Size",
+    variant: "outlined",
+    value: highestSize,
+    onChange: handleHighestSizeChange,
+    helperText: "Please select HIGHEST size of your product",
+    style: {
+      width: '170px'
+    }
+  }, props.sizes.map(function (size) {
+    return _react.default.createElement(_MenuItem.default, {
+      key: size,
+      value: size
+    }, size);
+  }));
+};
+
+var _default = HighestSize;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","@material-ui/core/TextField":"../node_modules/@material-ui/core/esm/TextField/index.js","@material-ui/core/MenuItem":"../node_modules/@material-ui/core/esm/MenuItem/index.js"}],"components/shippingFee.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _TextField = _interopRequireDefault(require("@material-ui/core/TextField"));
+
 var _reactNumberFormat = _interopRequireDefault(require("react-number-format"));
-
-var _singleAvailableSize = _interopRequireDefault(require("./singleAvailableSize"));
-
-var _config = require("../config");
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -57485,31 +57684,98 @@ function NumberFormatCustom(props) {
   }));
 }
 
-var Product = function Product(props) {
-  console.log("@@@@ this.props", props);
-
+var ShippingFee = function ShippingFee(props) {
   var _useState = (0, _react.useState)({
-    numberformat: '0'
+    numberformat: '6.5'
   }),
       _useState2 = _slicedToArray(_useState, 2),
       values = _useState2[0],
       setValues = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(3.5),
-      _useState4 = _slicedToArray(_useState3, 2),
-      lowestSize = _useState4[0],
-      setLowestSize = _useState4[1];
+  var handleChange = function handleChange(event) {
+    props.setProductInfo("Shipping Fee", event.target.value);
+    setValues(_extends({}, values, _defineProperty({}, event.target.name, event.target.value)));
+  };
 
-  var _useState5 = (0, _react.useState)(14),
-      _useState6 = _slicedToArray(_useState5, 2),
-      highestSize = _useState6[0],
-      setHighestSize = _useState6[1];
+  return _react.default.createElement(_TextField.default, {
+    error: props.shippingFeeError,
+    helperText: props.shippingFeeHelperText,
+    label: "Shipping Fee",
+    required: true,
+    value: values.numberformat,
+    onChange: handleChange,
+    name: "numberformat",
+    id: "formatted-numberformat-input",
+    variant: "outlined",
+    InputProps: {
+      inputComponent: NumberFormatCustom
+    }
+  });
+};
 
-  var _useState7 = (0, _react.useState)('Nike'),
-      _useState8 = _slicedToArray(_useState7, 2),
-      siteName = _useState8[0],
-      setSiteName = _useState8[1];
+var _default = ShippingFee;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","@material-ui/core/TextField":"../node_modules/@material-ui/core/esm/TextField/index.js","react-number-format":"../node_modules/react-number-format/dist/react-number-format.es.js"}],"components/product.js":[function(require,module,exports) {
+"use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _reactRedux = require("react-redux");
+
+var _product = require("../actions/product");
+
+var _productList = require("../actions/productList");
+
+var _newProduct = require("../actions/newProduct");
+
+var _deleteProduct = require("../actions/deleteProduct");
+
+var _Button = _interopRequireDefault(require("@material-ui/core/Button"));
+
+var _TextField = _interopRequireDefault(require("@material-ui/core/TextField"));
+
+var _InputAdornment = _interopRequireDefault(require("@material-ui/core/InputAdornment"));
+
+var _MenuItem = _interopRequireDefault(require("@material-ui/core/MenuItem"));
+
+var _reactNumberFormat = _interopRequireDefault(require("react-number-format"));
+
+var _singleAvailableSize = _interopRequireDefault(require("./singleAvailableSize"));
+
+var _config = require("../config");
+
+var _siteName = _interopRequireDefault(require("./siteName"));
+
+var _lowestSize = _interopRequireDefault(require("./lowestSize"));
+
+var _highestSize = _interopRequireDefault(require("./highestSize"));
+
+var _shippingFee = _interopRequireDefault(require("./shippingFee"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var Product = function Product(props) {
   var addingProduct = {
     brand: '',
     productName: '',
@@ -57522,30 +57788,109 @@ var Product = function Product(props) {
     shippingFee: 0
   };
   var availableSizes = [];
+  var sizes = [3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 13.5, 15];
 
-  var handleChange = function handleChange(event) {
-    setValues(_extends({}, values, _defineProperty({}, event.target.name, event.target.value)));
+  var _useState = (0, _react.useState)('Nike'),
+      _useState2 = _slicedToArray(_useState, 2),
+      siteName = _useState2[0],
+      setSiteName = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(3),
+      _useState4 = _slicedToArray(_useState3, 2),
+      lowestSize = _useState4[0],
+      setLowestSize = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(15),
+      _useState6 = _slicedToArray(_useState5, 2),
+      highestSize = _useState6[0],
+      setHighestSize = _useState6[1];
+
+  var _useState7 = (0, _react.useState)(6.5),
+      _useState8 = _slicedToArray(_useState7, 2),
+      shippingFee = _useState8[0],
+      setShippingFee = _useState8[1];
+
+  var _useState9 = (0, _react.useState)(false),
+      _useState10 = _slicedToArray(_useState9, 2),
+      shippingFeeError = _useState10[0],
+      setShippingFeeError = _useState10[1];
+
+  var _useState11 = (0, _react.useState)(''),
+      _useState12 = _slicedToArray(_useState11, 2),
+      shippingFeeHelperText = _useState12[0],
+      setShippingFeeHelperText = _useState12[1];
+
+  var _useState13 = (0, _react.useState)(''),
+      _useState14 = _slicedToArray(_useState13, 2),
+      brand = _useState14[0],
+      setBrand = _useState14[1];
+
+  var _useState15 = (0, _react.useState)(false),
+      _useState16 = _slicedToArray(_useState15, 2),
+      brandError = _useState16[0],
+      setBrandError = _useState16[1];
+
+  var _useState17 = (0, _react.useState)(''),
+      _useState18 = _slicedToArray(_useState17, 2),
+      brandHelperText = _useState18[0],
+      setBrandHelperText = _useState18[1];
+
+  var _useState19 = (0, _react.useState)(''),
+      _useState20 = _slicedToArray(_useState19, 2),
+      productName = _useState20[0],
+      setProductName = _useState20[1];
+
+  var _useState21 = (0, _react.useState)(false),
+      _useState22 = _slicedToArray(_useState21, 2),
+      productNameError = _useState22[0],
+      setProductNameError = _useState22[1];
+
+  var _useState23 = (0, _react.useState)(''),
+      _useState24 = _slicedToArray(_useState23, 2),
+      productNameHelperText = _useState24[0],
+      setProductNameHelperText = _useState24[1];
+
+  var _useState25 = (0, _react.useState)(0),
+      _useState26 = _slicedToArray(_useState25, 2),
+      price = _useState26[0],
+      setPrice = _useState26[1];
+
+  var _useState27 = (0, _react.useState)(false),
+      _useState28 = _slicedToArray(_useState27, 2),
+      priceError = _useState28[0],
+      setPriceError = _useState28[1];
+
+  var _useState29 = (0, _react.useState)(''),
+      _useState30 = _slicedToArray(_useState29, 2),
+      priceHelperText = _useState30[0],
+      setPriceHelperText = _useState30[1];
+
+  var _useState31 = (0, _react.useState)(''),
+      _useState32 = _slicedToArray(_useState31, 2),
+      url = _useState32[0],
+      setUrl = _useState32[1];
+
+  var _useState33 = (0, _react.useState)(false),
+      _useState34 = _slicedToArray(_useState33, 2),
+      urlError = _useState34[0],
+      setUrlError = _useState34[1];
+
+  var _useState35 = (0, _react.useState)(''),
+      _useState36 = _slicedToArray(_useState35, 2),
+      urlHelperText = _useState36[0],
+      setUrlHelperText = _useState36[1];
+
+  var setProductInfo = function setProductInfo(componentName, selectedItem) {
+    if (componentName === 'Site Name') {
+      setSiteName(selectedItem);
+    } else if (componentName === 'Lowest Size') {
+      setLowestSize(selectedItem);
+    } else if (componentName === 'Highest Size') {
+      setHighestSize(selectedItem);
+    } else if (componentName === 'Shipping Fee') {
+      setShippingFee(selectedItem);
+    }
   };
-
-  var sizes = [3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 13.5, 14];
-  var siteNames = ["Nike", "Adidas", "Goat"];
-
-  var handleLowestSizeChange = function handleLowestSizeChange(event) {
-    setLowestSize(event.target.value);
-  };
-
-  var handleHighestSizeChange = function handleHighestSizeChange(event) {
-    setHighestSize(event.target.value);
-    addingProduct.highSize = event.target.value;
-  };
-
-  var handleSiteNameChange = function handleSiteNameChange(event) {
-    // addingProduct.siteName = event.target.value;
-    setSiteName(event.target.value);
-    event.preventDefault();
-  };
-
-  addingProduct.siteName = siteName;
 
   var collectAvailableSizes = function collectAvailableSizes(clickedSize) {
     if (addingProduct.availableSizes.indexOf(clickedSize) === -1) {
@@ -57553,33 +57898,77 @@ var Product = function Product(props) {
     } else {
       addingProduct.availableSizes.splice(addingProduct.availableSizes.indexOf(clickedSize), 1);
     }
+  }; // console.log("@@@@ shippingFee", shippingFee);
 
-    console.log("***** availableSizes", addingProduct.availableSizes);
-  };
 
   var postProduct = function postProduct() {
-    console.log("~~~~~ addingProduct", addingProduct);
+    if (brand === '') {
+      setBrandError(true);
+      setBrandHelperText('Please input brand name');
+    } else if (brand !== '') {
+      setBrandError(false);
+      setBrandHelperText('');
+    }
 
-    if (addingProduct.brand !== '' && addingProduct.productName !== '' && addingProduct.price > 0 && addingProduct.lowSize > 0 && addingProduct.highSize > 0 && addingProduct.siteName !== '' && addingProduct.availableSizes.length !== 0 && addingProduct.url !== '', addingProduct.shippingFee > 0) {
-      console.log("********** got here");
+    if (productName === '') {
+      setProductNameError(true);
+      setProductNameHelperText('Please input product name');
+    } else if (productName !== '') {
+      setProductNameError(false);
+      setProductNameHelperText('');
+    }
+
+    if (price === 0 || price === '') {
+      setPriceError(true);
+      setPriceHelperText('Please input price of the product');
+    } else if (price !== 0 && price !== '') {
+      setPriceError(false);
+      setPriceHelperText('');
+    }
+
+    if (url === '') {
+      setUrlError(true);
+      setUrlHelperText('Please input url of the product page');
+    } else if (url !== '') {
+      setUrlError(false);
+      setUrlHelperText('');
+    }
+
+    if (shippingFee === '' || shippingFee < 1) {
+      setShippingFeeError(true);
+      setShippingFeeHelperText('Please input valid shipping fee. Must be greater than $1.');
+    } else {
+      setShippingFeeError(false);
+      setShippingFeeHelperText('');
+    }
+
+    if (brand !== '' && productName !== '' && price > 0 && lowestSize > 0 && highestSize > 0 && siteName !== '' && addingProduct.availableSizes.length > 0 && url !== '' && shippingFee > 0) {
+      addingProduct.brand = brand;
+      addingProduct.productName = productName;
+      addingProduct.price = price;
+      addingProduct.lowSize = lowestSize;
+      addingProduct.highSize = highestSize;
+      addingProduct.siteName = siteName;
+      addingProduct.url = url;
+      addingProduct.shippingFee = shippingFee;
+      console.log("********** got here addingProduct", addingProduct);
       props.postNewProduct(addingProduct);
     }
-  }; // console.log("~~~~~ addingProduct", addingProduct);
-
+  };
 
   var handleTextFieldChange = function handleTextFieldChange(event, textfieldName) {
     if (textfieldName === 'Brand Name') {
-      // console.log('event.target.value', event.target.value);
-      addingProduct.brand = event.target.value;
+      setBrand(event.target.value);
     } else if (textfieldName === 'Product Name') {
-      addingProduct.productName = event.target.value;
+      setProductName(event.target.value);
     } else if (textfieldName === 'Price') {
-      addingProduct.price = event.target.value;
+      setPrice(event.target.value);
     } else if (textfieldName === 'Product URL') {
-      addingProduct.url = event.target.value;
+      setUrl(event.target.value);
     }
   };
 
+  console.log("@@@@ props", props);
   return _react.default.createElement("div", null, _react.default.createElement("h2", null, "Add a product"), _react.default.createElement(_Button.default, {
     variant: "contained",
     onClick: function onClick() {
@@ -57595,7 +57984,12 @@ var Product = function Product(props) {
     onClick: function onClick() {
       return postProduct();
     }
-  }, "Post New Product"), Object.keys(props.productList).map(function (index) {
+  }, "Post New Product"), _react.default.createElement("h2", null, "Delete Product"), _react.default.createElement(_Button.default, {
+    variant: "contained",
+    onClick: function onClick() {
+      return props.deleteProduct(32);
+    }
+  }, "Delete a product"), Object.keys(props.productList).map(function (index) {
     var singleProduct = props.productList[index];
     return _react.default.createElement("div", {
       key: index
@@ -57607,6 +58001,8 @@ var Product = function Product(props) {
       marginTop: '30px'
     }
   }, _react.default.createElement(_TextField.default, {
+    error: brandError,
+    helperText: brandHelperText,
     required: true,
     id: "standard-basic",
     label: "Brand Name",
@@ -57615,6 +58011,8 @@ var Product = function Product(props) {
       return handleTextFieldChange(e, "Brand Name");
     }
   }), _react.default.createElement(_TextField.default, {
+    error: productNameError,
+    helperText: productNameHelperText,
     required: true,
     id: "standard-basic",
     label: "Product Name",
@@ -57623,6 +58021,8 @@ var Product = function Product(props) {
       return handleTextFieldChange(e, "Product Name");
     }
   }), _react.default.createElement(_TextField.default, {
+    error: priceError,
+    helperText: priceHelperText,
     required: true,
     id: "filled-basic",
     label: "Price",
@@ -57637,75 +58037,39 @@ var Product = function Product(props) {
     }
   }), _react.default.createElement(_TextField.default, {
     required: true,
+    error: urlError,
+    helperText: urlHelperText,
     id: "outlined-basic",
     label: "Product URL",
     variant: "outlined",
     onChange: function onChange(e) {
       return handleTextFieldChange(e, "Product URL");
     }
-  }), _react.default.createElement(_TextField.default, {
-    label: "Shipping Fee",
-    required: true,
-    value: values.numberformat,
-    onChange: handleChange,
-    name: "numberformat",
-    id: "formatted-numberformat-input",
-    variant: "outlined",
-    InputProps: {
-      inputComponent: NumberFormatCustom
-    }
+  }), _react.default.createElement(_shippingFee.default, {
+    setProductInfo: setProductInfo,
+    shippingFeeError: shippingFeeError,
+    shippingFeeHelperText: shippingFeeHelperText
   })), _react.default.createElement("form", {
     style: {
       marginTop: '20px'
     }
-  }, _react.default.createElement(_TextField.default, {
-    select: true,
-    label: "Site Name",
-    variant: "outlined",
-    value: siteName,
-    onChange: handleSiteNameChange,
-    helperText: "Please select name of the site"
-  }, siteNames.map(function (siteName) {
-    return _react.default.createElement(_MenuItem.default, {
-      key: siteName,
-      value: siteName
-    }, siteName);
-  })), _react.default.createElement(_TextField.default, {
-    select: true,
-    label: "Lowest Size",
-    variant: "outlined",
-    value: lowestSize,
-    onChange: handleLowestSizeChange,
-    helperText: "Please select LOWEST size of your product",
-    style: {
-      width: '170px'
-    }
-  }, sizes.map(function (size) {
-    return _react.default.createElement(_MenuItem.default, {
-      key: size,
-      value: size
-    }, size);
-  })), _react.default.createElement(_TextField.default, {
-    select: true,
-    label: "Highest Size",
-    variant: "outlined",
-    value: highestSize,
-    onChange: handleHighestSizeChange,
-    helperText: "Please select HIGHEST size of your product",
-    style: {
-      width: '170px'
-    }
-  }, sizes.map(function (size) {
-    return _react.default.createElement(_MenuItem.default, {
-      key: size,
-      value: size
-    }, size);
-  }))), _react.default.createElement("div", null, _react.default.createElement("p", {
+  }, _react.default.createElement(_siteName.default, {
+    setProductInfo: setProductInfo
+  }), _react.default.createElement(_lowestSize.default, {
+    sizes: sizes,
+    setProductInfo: setProductInfo
+  }), _react.default.createElement(_highestSize.default, {
+    sizes: sizes,
+    setProductInfo: setProductInfo
+  })), _react.default.createElement("div", null, _react.default.createElement("p", {
     style: {
       marginBottom: '5px'
     }
   }, "Available Sizes"), sizes.map(function (size, index) {
+    var disabled = false;
+    if (size < lowestSize) disabled = true;else if (size > highestSize) disabled = true;else disabled = false;
     return _react.default.createElement(_singleAvailableSize.default, {
+      disabled: disabled,
       key: index,
       size: size,
       collectAvailableSizes: collectAvailableSizes
@@ -57717,18 +58081,20 @@ var mapStateToProps = function mapStateToProps(state, props) {
   return {
     product: state.product,
     newProduct: state.newProduct,
-    productList: state.productList
+    productList: state.productList,
+    deletedProduct: state.deletedProduct
   };
 };
 
 var _default = (0, _reactRedux.connect)(mapStateToProps, {
   fetchProduct: _product.fetchProduct,
   fetchAllProducts: _productList.fetchAllProducts,
-  postNewProduct: _newProduct.postNewProduct
+  postNewProduct: _newProduct.postNewProduct,
+  deleteProduct: _deleteProduct.deleteProduct
 })(Product);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","../actions/product":"actions/product.js","../actions/productList":"actions/productList.js","../actions/newProduct":"actions/newProduct.js","@material-ui/core/Button":"../node_modules/@material-ui/core/esm/Button/index.js","@material-ui/core/TextField":"../node_modules/@material-ui/core/esm/TextField/index.js","@material-ui/core/InputAdornment":"../node_modules/@material-ui/core/esm/InputAdornment/index.js","@material-ui/core/MenuItem":"../node_modules/@material-ui/core/esm/MenuItem/index.js","react-number-format":"../node_modules/react-number-format/dist/react-number-format.es.js","./singleAvailableSize":"components/singleAvailableSize.js","../config":"config.js"}],"reducers/fetchStates.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","../actions/product":"actions/product.js","../actions/productList":"actions/productList.js","../actions/newProduct":"actions/newProduct.js","../actions/deleteProduct":"actions/deleteProduct.js","@material-ui/core/Button":"../node_modules/@material-ui/core/esm/Button/index.js","@material-ui/core/TextField":"../node_modules/@material-ui/core/esm/TextField/index.js","@material-ui/core/InputAdornment":"../node_modules/@material-ui/core/esm/InputAdornment/index.js","@material-ui/core/MenuItem":"../node_modules/@material-ui/core/esm/MenuItem/index.js","react-number-format":"../node_modules/react-number-format/dist/react-number-format.es.js","./singleAvailableSize":"components/singleAvailableSize.js","../config":"config.js","./siteName":"components/siteName.js","./lowestSize":"components/lowestSize.js","./highestSize":"components/highestSize.js","./shippingFee":"components/shippingFee.js"}],"reducers/fetchStates.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -57915,6 +58281,52 @@ var newProduct = function newProduct() {
 
 var _default = newProduct;
 exports.default = _default;
+},{"../actions/types":"actions/types.js","./fetchStates":"reducers/fetchStates.js"}],"reducers/deleteProduct.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _types = require("../actions/types");
+
+var _fetchStates = _interopRequireDefault(require("./fetchStates"));
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var deleteProduct = function deleteProduct() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _types.PRODUCT_DELETE.DELETE:
+      return _extends({}, state, {
+        status: _fetchStates.default.fetching
+      });
+
+    case _types.PRODUCT_DELETE.DELETE_ERROR:
+      return _extends({}, state, {
+        status: _fetchStates.default.error,
+        message: action.message
+      });
+
+    case _types.PRODUCT_DELETE.DELETE_SUCCESS:
+      console.log("2222 got here"); // return { ...state, newProduct: action.newProduct }
+
+      return _extends({}, state, {
+        status: _fetchStates.default.success
+      }, action.message);
+
+    default:
+      return state;
+  }
+};
+
+var _default = deleteProduct;
+exports.default = _default;
 },{"../actions/types":"actions/types.js","./fetchStates":"reducers/fetchStates.js"}],"reducers/index.js":[function(require,module,exports) {
 "use strict";
 
@@ -57929,6 +58341,8 @@ var _productList = _interopRequireDefault(require("./productList"));
 
 var _newProduct = _interopRequireDefault(require("./newProduct"));
 
+var _deleteProduct = _interopRequireDefault(require("./deleteProduct"));
+
 var _redux = require("redux");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -57936,11 +58350,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var _default = (0, _redux.combineReducers)({
   product: _product.default,
   productList: _productList.default,
-  newProduct: _newProduct.default
+  newProduct: _newProduct.default,
+  deletedProduct: _deleteProduct.default
 });
 
 exports.default = _default;
-},{"./product":"reducers/product.js","./productList":"reducers/productList.js","./newProduct":"reducers/newProduct.js","redux":"../node_modules/redux/es/redux.js"}],"../../../../.nvm/versions/node/v12.14.1/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"./product":"reducers/product.js","./productList":"reducers/productList.js","./newProduct":"reducers/newProduct.js","./deleteProduct":"reducers/deleteProduct.js","redux":"../node_modules/redux/es/redux.js"}],"../../../../.nvm/versions/node/v12.14.1/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -58065,7 +58480,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64970" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61047" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

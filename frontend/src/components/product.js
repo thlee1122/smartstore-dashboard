@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { fetchProduct } from '../actions/product';
 import { fetchAllProducts } from '../actions/productList';
 import { postNewProduct } from '../actions/newProduct';
+import { deleteProduct } from '../actions/deleteProduct';
+
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -10,38 +12,12 @@ import MenuItem from '@material-ui/core/MenuItem';
 import NumberFormat from 'react-number-format';
 import SingleAvailableSize from './singleAvailableSize';
 import { BACKEND } from '../config';
-
-function NumberFormatCustom(props) {
-  const { inputRef, onChange, ...other } = props;
-
-  return (
-    <NumberFormat
-      {...other}
-      getInputRef={inputRef}
-      onValueChange={(values) => {
-        onChange({
-          target: {
-            name: props.name,
-            value: values.value,
-          },
-        });
-      }}
-      thousandSeparator
-      isNumericString
-      prefix="$ "
-      allowNegative={false}
-    />
-  );
-}
+import SiteName from './siteName';
+import LowestSize from './lowestSize';
+import HighestSize from './highestSize';
+import ShippingFee from './shippingFee';
 
 const Product = (props) => {
-	console.log("@@@@ this.props", props);
-
-	const [values, setValues] = useState({ numberformat: '0' });
-  const [lowestSize, setLowestSize] = useState(3.5);
-  const [highestSize, setHighestSize] = useState(14);
-  const [siteName, setSiteName] = useState('Nike');
-
   const addingProduct = {
   	brand: '',
   	productName: '',
@@ -56,84 +32,133 @@ const Product = (props) => {
 
   const availableSizes = [];
 
-  const handleChange = (event) => {
-    setValues({
-      ...values,
-      [event.target.name]: event.target.value,
-    });
-  };
+  const sizes = [3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 
+  8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 13.5, 15];
 
-  const sizes = [3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 
-  8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 13.5, 14];
+  const [siteName, setSiteName] = useState('Nike');
+  const [lowestSize, setLowestSize] = useState(3);
+  const [highestSize, setHighestSize] = useState(15);
 
-  const siteNames = ["Nike", "Adidas", "Goat"];
+  const [shippingFee, setShippingFee] = useState(6.5);
+  const [shippingFeeError, setShippingFeeError] = useState(false);
+  const [shippingFeeHelperText, setShippingFeeHelperText] = useState('');
 
-	const handleLowestSizeChange = (event) => {
-		setLowestSize(event.target.value);
-	}
+  const [brand, setBrand] = useState('');
+  const [brandError, setBrandError] = useState(false);
+  const [brandHelperText, setBrandHelperText] = useState('');
 
-	const handleHighestSizeChange = (event) => {
-		setHighestSize(event.target.value);
 
-		addingProduct.highSize = event.target.value;
-	}
+  const [productName, setProductName] = useState('');
+  const [productNameError, setProductNameError] = useState(false);
+  const [productNameHelperText, setProductNameHelperText] = useState('');
 
-	const handleSiteNameChange = (event) => {
-		// addingProduct.siteName = event.target.value;
+  const [price, setPrice] = useState(0);
+  const [priceError, setPriceError] = useState(false);
+  const [priceHelperText, setPriceHelperText] = useState('');
 
-		setSiteName(event.target.value);
+  const [url, setUrl] = useState('');
+  const [urlError, setUrlError] = useState(false);
+  const [urlHelperText, setUrlHelperText] = useState('');
 
-		event.preventDefault();
-	}
-
-	addingProduct.siteName = siteName;
+  const setProductInfo = (componentName, selectedItem) => {
+  	if(componentName === 'Site Name') {
+  		setSiteName(selectedItem);
+  	} else if(componentName === 'Lowest Size') {
+  		setLowestSize(selectedItem);
+  	} else if(componentName === 'Highest Size') {
+  		setHighestSize(selectedItem);
+  	} else if(componentName === 'Shipping Fee') {
+  		setShippingFee(selectedItem);
+  	}
+  }
 
 	const collectAvailableSizes = (clickedSize) => {
 		if(addingProduct.availableSizes.indexOf(clickedSize) === -1) {
 			addingProduct.availableSizes.push(clickedSize);
-
 		} else {
 			addingProduct.availableSizes.splice(addingProduct.availableSizes.indexOf(clickedSize), 1);
 		}
-
-		console.log("***** availableSizes", addingProduct.availableSizes);
 	}
 
-	const postProduct = () => {
-		console.log("~~~~~ addingProduct", addingProduct);
+	// console.log("@@@@ shippingFee", shippingFee);
 
-		if(addingProduct.brand !== '' &&
-			addingProduct.productName !== '' &&
-			addingProduct.price > 0 &&
-			addingProduct.lowSize > 0 &&
-			addingProduct.highSize > 0 &&
-			addingProduct.siteName !== '' &&
-			addingProduct.availableSizes.length !== 0 &&
-			addingProduct.url !== '',
-			addingProduct.shippingFee > 0
+	const postProduct = () => {
+		if(brand === '') {
+			setBrandError(true);
+			setBrandHelperText('Please input brand name');
+		} else if(brand !== '') {
+			setBrandError(false);
+			setBrandHelperText('');
+		}
+
+		if(productName === '') {
+			setProductNameError(true);
+			setProductNameHelperText('Please input product name');
+		} else if(productName !== '') {
+			setProductNameError(false);
+			setProductNameHelperText('');
+		}
+
+		if(price === 0 || price === '') {
+			setPriceError(true);
+			setPriceHelperText('Please input price of the product');
+		} else if(price !== 0 && price !== '') {
+			setPriceError(false);
+			setPriceHelperText('');
+		}
+
+		if(url === '') {
+			setUrlError(true);
+			setUrlHelperText('Please input url of the product page');
+		} else if(url !== '') {
+			setUrlError(false);
+			setUrlHelperText('');
+		}
+
+		if(shippingFee === '' || shippingFee < 1) {
+			setShippingFeeError(true);
+			setShippingFeeHelperText('Please input valid shipping fee. Must be greater than $1.');
+		} else {
+			setShippingFeeError(false);
+			setShippingFeeHelperText('');
+		}
+
+
+		if(brand !== '' && productName !== '' &&
+			price > 0 && lowestSize > 0 &&
+			highestSize > 0 && siteName !== '' &&
+			addingProduct.availableSizes.length > 0 &&
+			url !== '' && shippingFee > 0
 		) {
-			console.log("********** got here");
+
+			addingProduct.brand = brand;
+			addingProduct.productName = productName;
+			addingProduct.price = price;
+			addingProduct.lowSize = lowestSize;
+			addingProduct.highSize = highestSize;
+			addingProduct.siteName = siteName;
+			addingProduct.url = url;
+			addingProduct.shippingFee = shippingFee;
+
+			console.log("********** got here addingProduct", addingProduct);
 
 			props.postNewProduct(addingProduct);
 		}
 	}
 
-	// console.log("~~~~~ addingProduct", addingProduct);
-
 	const handleTextFieldChange = (event, textfieldName) => {
 		if(textfieldName === 'Brand Name') {
-			// console.log('event.target.value', event.target.value);
-
-			addingProduct.brand = event.target.value;
-
+			setBrand(event.target.value);
 		} else if(textfieldName === 'Product Name') {
-			addingProduct.productName = event.target.value;
+			setProductName(event.target.value);
 		} else if(textfieldName === 'Price') {
-			addingProduct.price = event.target.value;
+			setPrice(event.target.value);
 		} else if(textfieldName === 'Product URL') {
-			addingProduct.url = event.target.value;
+			setUrl(event.target.value);
 		}
 	}
+
+	console.log("@@@@ props", props);
 
 	return (
 		<div>
@@ -145,6 +170,13 @@ const Product = (props) => {
 
 			<h2>Post New Product</h2>
 			<Button variant="contained" onClick={() => postProduct()}>Post New Product</Button>
+
+
+
+			<h2>Delete Product</h2>
+			<Button variant="contained" onClick={() => props.deleteProduct(32)} >Delete a product</Button>
+
+
 
 			{
 				Object.keys(props.productList).map((index) => {
@@ -158,6 +190,8 @@ const Product = (props) => {
 
 			<form noValidate autoComplete="off" style={{marginTop: '30px'}}>
 				<TextField 
+					error={brandError}
+					helperText={brandHelperText}
 					required 
 					id="standard-basic" 
 					label="Brand Name" 
@@ -165,6 +199,8 @@ const Product = (props) => {
 					onChange={(e) => handleTextFieldChange(e, "Brand Name")}
 				/>
 				<TextField 
+					error={productNameError}
+					helperText={productNameHelperText}
 					required 
 					id="standard-basic" 
 					label="Product Name" 
@@ -172,7 +208,12 @@ const Product = (props) => {
 					onChange={(e) => handleTextFieldChange(e, "Product Name")}
 				/>
     		<TextField 
-    			required id="filled-basic" label="Price" variant="outlined"
+					error={priceError}
+					helperText={priceHelperText}
+    			required 
+    			id="filled-basic" 
+    			label="Price" 
+    			variant="outlined"
     			InputProps={{
             startAdornment: <InputAdornment position="start">$</InputAdornment>,
           }} 
@@ -181,77 +222,25 @@ const Product = (props) => {
 
     		<TextField 
     			required 
+    			error={urlError}
+					helperText={urlHelperText}
     			id="outlined-basic" 
     			label="Product URL" 
     			variant="outlined" 
     			onChange={(e) => handleTextFieldChange(e, "Product URL")}
     		/>
 
-    		<TextField
-	        label="Shipping Fee"
-	        required
-	        value={values.numberformat}
-	        onChange={handleChange}
-	        name="numberformat"
-	        id="formatted-numberformat-input"
-	        variant="outlined"
-	        InputProps={{
-	          inputComponent: NumberFormatCustom,
-	        }}
-	      />
+    		<ShippingFee 
+    			setProductInfo={setProductInfo} 
+    			shippingFeeError={shippingFeeError}
+    			shippingFeeHelperText={shippingFeeHelperText}
+    		/>
 			</form>
 
 			<form style={{marginTop: '20px'}}>
-
-				<TextField
-          select
-          label="Site Name"
-          variant="outlined"
-          value={siteName}
-          onChange={handleSiteNameChange}
-          helperText="Please select name of the site"
-        >
-        	{siteNames.map((siteName) => (
-            <MenuItem 
-            	key={siteName} 
-            	value={siteName}
-            >
-              {siteName}
-            </MenuItem>
-          ))}
-        </TextField>
-
-				<TextField
-          select
-          label="Lowest Size"
-          variant="outlined"
-          value={lowestSize}
-          onChange={handleLowestSizeChange}
-          helperText="Please select LOWEST size of your product"
-          style={{ width: '170px' }}
-        >
-        	{sizes.map((size) => (
-            <MenuItem key={size} value={size}>
-              {size}
-            </MenuItem>
-          ))}
-        </TextField>
-
-        <TextField
-          select
-          label="Highest Size"
-          variant="outlined"
-          value={highestSize}
-          onChange={handleHighestSizeChange}
-          helperText="Please select HIGHEST size of your product"
-          style={{ width: '170px' }}
-        >
-        	{sizes.map((size) => (
-            <MenuItem key={size} value={size}>
-              {size}
-            </MenuItem>
-          ))}
-        </TextField>
+				<SiteName setProductInfo={setProductInfo} />
+				<LowestSize sizes={sizes} setProductInfo={setProductInfo} />
+        <HighestSize sizes={sizes} setProductInfo={setProductInfo} />
 			</form>
 
 			<div>
@@ -259,8 +248,15 @@ const Product = (props) => {
 
 				{
 					sizes.map((size, index) => {
+						let disabled = false;
+
+						if(size < lowestSize) disabled = true;
+						else if(size > highestSize) disabled = true;
+						else disabled = false;
+
 						return (
 							<SingleAvailableSize 
+								disabled={disabled}
 								key={index} size={size}
 								collectAvailableSizes={collectAvailableSizes}
 							/>
@@ -275,12 +271,14 @@ const Product = (props) => {
 const mapStateToProps = (state, props) => ({
   product: state.product,
   newProduct: state.newProduct,
-  productList: state.productList
+  productList: state.productList,
+  deletedProduct: state.deletedProduct
 });
 
 export default connect(mapStateToProps, 
 	{ 
 		fetchProduct,
 		fetchAllProducts,
-		postNewProduct
+		postNewProduct,
+		deleteProduct
 	})(Product);
