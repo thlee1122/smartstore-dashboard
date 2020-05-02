@@ -8,14 +8,15 @@ const DEFAULT_PROPERTIES = {
 	siteName: '',
 	availableSizes: [],
 	url: '',
-	shippingFee: 0
+	shippingFee: 0,
+	updatedDate: ''
 };
 
 class Product {
 	constructor({ 
 		productId, brand, productName, 
 		price, lowSize, highSize, siteName, 
-		availableSizes, url, shippingFee } = {}) {
+		availableSizes, url, shippingFee, updatedDate } = {}) {
 
 		this.productId = productId || DEFAULT_PROPERTIES.productId;
 		this.brand = brand || DEFAULT_PROPERTIES.brand;
@@ -27,6 +28,7 @@ class Product {
 		this.availableSizes = availableSizes || DEFAULT_PROPERTIES.availableSizes;
 		this.url = url || DEFAULT_PROPERTIES.url;
 		this.shippingFee = shippingFee || DEFAULT_PROPERTIES.shippingFee;
+		this.updatedDate = updatedDate || DEFAULT_PROPERTIES.updatedDate;
 	}
 }
 

@@ -4,14 +4,14 @@ class ProductTable {
 	static storeProduct(product) {
 		const { 
 			brand, productName, price, lowSize, highSize, 
-			siteName, availableSizes, url, shippingFee } = product;
+			siteName, availableSizes, url, shippingFee, updatedDate } = product;
 
 		return new Promise((resolve, reject) => {
 			pool.query(
 				`INSERT INTO product(brand, "productName", price, "lowSize", 
-				"highSize", "siteName", "availableSizes", url, "shippingFee")
-         VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id`,
-        [brand, productName, price, lowSize, highSize, siteName, availableSizes, url, shippingFee],
+				"highSize", "siteName", "availableSizes", url, "shippingFee", "updatedDate")
+         VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id`,
+        [brand, productName, price, lowSize, highSize, siteName, availableSizes, url, shippingFee, updatedDate],
         (error, response) => {
         	if(error) return reject(error);
 
@@ -42,7 +42,7 @@ class ProductTable {
 		});
 	}
 
-	
+
 	
 
 	static getAllProducts() {

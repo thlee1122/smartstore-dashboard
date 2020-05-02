@@ -8,5 +8,6 @@ CREATE TABLE product(
 	"siteName"					VARCHAR(64),
 	"availableSizes"		NUMERIC [],
 	url									TEXT,
-	"shippingFee"				NUMERIC
+	"shippingFee"				NUMERIC,
+	"updatedDate"				TIMESTAMP
 );

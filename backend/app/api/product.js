@@ -15,6 +15,16 @@ router.delete('/delete/product', (req, res, next) => {
     .catch(error => next(error));
 });
 
+// router.put('/update', (req, res, next) => {
+//   const { dragonId, nickname, isPublic, saleValue, sireValue } = req.body;
+
+//   DragonTable.updateDragon({ dragonId, nickname, isPublic, saleValue, sireValue })
+//     .then(() => res.json({ message: 'successfully updated dragon' }))
+//     .catch(error => next(error));
+// });
+
+
+
 router.post('/newest', (req, res, next) => {
 	console.log("~~~~~ req.body", req.body);
 	// console.log("11111 req", req);
@@ -37,11 +47,15 @@ router.post('/newest', (req, res, next) => {
 		.then(({ productId }) => {
 			console.log('productId', productId);
 
+			console.log("~~~ newProduct", newProduct);
+
 			newProduct.productId = productId;
 
 			// res.json({ product });
 			// res.json({ newProduct: newProduct });
+			console.log("@@@@", res.json({ newProduct }));
 			res.json({ newProduct });
+
 		})
 		.catch(error => next(error));
 });
