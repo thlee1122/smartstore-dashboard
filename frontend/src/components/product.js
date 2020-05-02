@@ -1,10 +1,7 @@
 import React, { useState, useEffect }             from 'react';
 import { connect } from 'react-redux';
 import { fetchProduct } from '../actions/product';
-import { fetchAllProducts } from '../actions/productList';
 import { postNewProduct } from '../actions/newProduct';
-import { deleteProduct } from '../actions/deleteProduct';
-
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -17,6 +14,8 @@ import LowestSize from './lowestSize';
 import HighestSize from './highestSize';
 import ShippingFee from './shippingFee';
 
+import ProductList from './productList';
+
 const Product = (props) => {
   const addingProduct = {
   	brand: '',
@@ -27,7 +26,8 @@ const Product = (props) => {
   	siteName: '',
   	availableSizes: [],
   	url: '',
-  	shippingFee: 0
+  	shippingFee: 0,
+  	updatedDate: ''
   };
 
   const availableSizes = [];
@@ -139,6 +139,7 @@ const Product = (props) => {
 			addingProduct.siteName = siteName;
 			addingProduct.url = url;
 			addingProduct.shippingFee = shippingFee;
+			addingProduct.updatedDate = new Date().toLocaleString();
 
 			console.log("********** got here addingProduct", addingProduct);
 
@@ -165,28 +166,8 @@ const Product = (props) => {
 			<h2>Add a product</h2>
 			<Button variant="contained" onClick={() => props.fetchProduct()}>New Product</Button>
 
-			<h2>Get Product List</h2>
-			<Button variant="contained" onClick={() => props.fetchAllProducts()}>Get Product List</Button>
-
 			<h2>Post New Product</h2>
 			<Button variant="contained" onClick={() => postProduct()}>Post New Product</Button>
-
-
-
-			<h2>Delete Product</h2>
-			<Button variant="contained" onClick={() => props.deleteProduct(32)} >Delete a product</Button>
-
-
-
-			{
-				Object.keys(props.productList).map((index) => {
-					const singleProduct = props.productList[index];
-
-					return (
-						<div key={index}><p>{singleProduct.brand}</p></div>
-					);
-				})
-			}
 
 			<form noValidate autoComplete="off" style={{marginTop: '30px'}}>
 				<TextField 
@@ -264,6 +245,8 @@ const Product = (props) => {
 					})
 				}
 			</div>
+
+			<ProductList />
 		</div>
 	);
 }
@@ -278,7 +261,5 @@ const mapStateToProps = (state, props) => ({
 export default connect(mapStateToProps, 
 	{ 
 		fetchProduct,
-		fetchAllProducts,
-		postNewProduct,
-		deleteProduct
+		postNewProduct
 	})(Product);

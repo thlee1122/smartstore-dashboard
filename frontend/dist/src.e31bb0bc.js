@@ -31767,47 +31767,6 @@ var fetchProduct = function fetchProduct() {
 };
 
 exports.fetchProduct = fetchProduct;
-},{"./types":"actions/types.js","../config":"config.js"}],"actions/productList.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.fetchAllProducts = void 0;
-
-var _types = require("./types");
-
-var _config = require("../config");
-
-var fetchAllProducts = function fetchAllProducts() {
-  return function (dispatch) {
-    dispatch({
-      type: _types.PRODUCT_LIST.FETCH
-    });
-    return fetch("".concat(_config.BACKEND.ADDRESS, "/product/all")).then(function (response) {
-      return response.json();
-    }).then(function (json) {
-      if (json.type === 'error') {
-        dispatch({
-          type: _types.PRODUCT_LIST.FETCH_ERROR,
-          message: json.message
-        });
-      } else {
-        dispatch({
-          type: _types.PRODUCT_LIST.FETCH_SUCCESS,
-          allProducts: json.allProducts
-        });
-      }
-    }).catch(function (error) {
-      return dispatch({
-        type: _types.PRODUCT_LIST.FETCH_ERROR,
-        message: error.message
-      });
-    });
-  };
-};
-
-exports.fetchAllProducts = fetchAllProducts;
 },{"./types":"actions/types.js","../config":"config.js"}],"actions/newProduct.js":[function(require,module,exports) {
 "use strict";
 
@@ -31859,57 +31818,6 @@ var postNewProduct = function postNewProduct(newProduct) {
 };
 
 exports.postNewProduct = postNewProduct;
-},{"./types":"actions/types.js","../config":"config.js"}],"actions/deleteProduct.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.deleteProduct = void 0;
-
-var _types = require("./types");
-
-var _config = require("../config");
-
-var deleteProduct = function deleteProduct(productId) {
-  return function (dispatch) {
-    // console.log('inside postNewProduct', newProduct);
-    dispatch({
-      type: _types.PRODUCT_DELETE.DELETE
-    });
-    return fetch("".concat(_config.BACKEND.ADDRESS, "/product/delete/product"), {
-      method: 'DELETE',
-      // credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        productId: productId
-      })
-    }).then(function (response) {
-      return response.json();
-    }).then(function (json) {
-      if (json.type === 'error') {
-        dispatch({
-          type: _types.PRODUCT_DELETE.DELETE_ERROR,
-          message: json.message
-        });
-      } else {
-        dispatch({
-          type: _types.PRODUCT_DELETE.DELETE_SUCCESS,
-          deletedProduct: json.message
-        });
-      }
-    }).catch(function (error) {
-      return dispatch({
-        type: _types.PRODUCT_DELETE.DELETE_ERROR,
-        message: error.message
-      });
-    });
-  };
-};
-
-exports.deleteProduct = deleteProduct;
 },{"./types":"actions/types.js","../config":"config.js"}],"../node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js":[function(require,module,exports) {
 "use strict";
 
@@ -57715,7 +57623,4027 @@ var ShippingFee = function ShippingFee(props) {
 
 var _default = ShippingFee;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","@material-ui/core/TextField":"../node_modules/@material-ui/core/esm/TextField/index.js","react-number-format":"../node_modules/react-number-format/dist/react-number-format.es.js"}],"components/product.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","@material-ui/core/TextField":"../node_modules/@material-ui/core/esm/TextField/index.js","react-number-format":"../node_modules/react-number-format/dist/react-number-format.es.js"}],"actions/productList.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.fetchAllProducts = void 0;
+
+var _types = require("./types");
+
+var _config = require("../config");
+
+var fetchAllProducts = function fetchAllProducts() {
+  return function (dispatch) {
+    dispatch({
+      type: _types.PRODUCT_LIST.FETCH
+    });
+    return fetch("".concat(_config.BACKEND.ADDRESS, "/product/all")).then(function (response) {
+      return response.json();
+    }).then(function (json) {
+      if (json.type === 'error') {
+        dispatch({
+          type: _types.PRODUCT_LIST.FETCH_ERROR,
+          message: json.message
+        });
+      } else {
+        dispatch({
+          type: _types.PRODUCT_LIST.FETCH_SUCCESS,
+          allProducts: json.allProducts
+        });
+      }
+    }).catch(function (error) {
+      return dispatch({
+        type: _types.PRODUCT_LIST.FETCH_ERROR,
+        message: error.message
+      });
+    });
+  };
+};
+
+exports.fetchAllProducts = fetchAllProducts;
+},{"./types":"actions/types.js","../config":"config.js"}],"actions/deleteProduct.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.deleteProduct = void 0;
+
+var _types = require("./types");
+
+var _config = require("../config");
+
+var deleteProduct = function deleteProduct(productId) {
+  return function (dispatch) {
+    // console.log('inside postNewProduct', newProduct);
+    dispatch({
+      type: _types.PRODUCT_DELETE.DELETE
+    });
+    return fetch("".concat(_config.BACKEND.ADDRESS, "/product/delete/product"), {
+      method: 'DELETE',
+      // credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        productId: productId
+      })
+    }).then(function (response) {
+      return response.json();
+    }).then(function (json) {
+      if (json.type === 'error') {
+        dispatch({
+          type: _types.PRODUCT_DELETE.DELETE_ERROR,
+          message: json.message
+        });
+      } else {
+        dispatch({
+          type: _types.PRODUCT_DELETE.DELETE_SUCCESS,
+          deletedProduct: json.message
+        });
+      }
+    }).catch(function (error) {
+      return dispatch({
+        type: _types.PRODUCT_DELETE.DELETE_ERROR,
+        message: error.message
+      });
+    });
+  };
+};
+
+exports.deleteProduct = deleteProduct;
+},{"./types":"actions/types.js","../config":"config.js"}],"../node_modules/@material-ui/core/esm/Collapse/Collapse.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.styles = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/extends"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/objectWithoutProperties"));
+
+var React = _interopRequireWildcard(require("react"));
+
+var _clsx = _interopRequireDefault(require("clsx"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _reactTransitionGroup = require("react-transition-group");
+
+var _withStyles = _interopRequireDefault(require("../styles/withStyles"));
+
+var _transitions = require("../styles/transitions");
+
+var _utils = require("../transitions/utils");
+
+var _useTheme = _interopRequireDefault(require("../styles/useTheme"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var styles = function styles(theme) {
+  return {
+    /* Styles applied to the container element. */
+    container: {
+      height: 0,
+      overflow: 'hidden',
+      transition: theme.transitions.create('height')
+    },
+
+    /* Styles applied to the container element when the transition has entered. */
+    entered: {
+      height: 'auto',
+      overflow: 'visible'
+    },
+
+    /* Styles applied to the container element when the transition has exited and `collapsedHeight` != 0px. */
+    hidden: {
+      visibility: 'hidden'
+    },
+
+    /* Styles applied to the outer wrapper element. */
+    wrapper: {
+      // Hack to get children with a negative margin to not falsify the height computation.
+      display: 'flex'
+    },
+
+    /* Styles applied to the inner wrapper element. */
+    wrapperInner: {
+      width: '100%'
+    }
+  };
+};
+/**
+ * The Collapse transition is used by the
+ * [Vertical Stepper](/components/steppers/#vertical-stepper) StepContent component.
+ * It uses [react-transition-group](https://github.com/reactjs/react-transition-group) internally.
+ */
+
+
+exports.styles = styles;
+var Collapse = React.forwardRef(function Collapse(props, ref) {
+  var children = props.children,
+      classes = props.classes,
+      className = props.className,
+      _props$collapsedHeigh = props.collapsedHeight,
+      collapsedHeightProp = _props$collapsedHeigh === void 0 ? '0px' : _props$collapsedHeigh,
+      _props$component = props.component,
+      Component = _props$component === void 0 ? 'div' : _props$component,
+      inProp = props.in,
+      onEnter = props.onEnter,
+      onEntered = props.onEntered,
+      onEntering = props.onEntering,
+      onExit = props.onExit,
+      onExiting = props.onExiting,
+      style = props.style,
+      _props$timeout = props.timeout,
+      timeout = _props$timeout === void 0 ? _transitions.duration.standard : _props$timeout,
+      _props$TransitionComp = props.TransitionComponent,
+      TransitionComponent = _props$TransitionComp === void 0 ? _reactTransitionGroup.Transition : _props$TransitionComp,
+      other = (0, _objectWithoutProperties2.default)(props, ["children", "classes", "className", "collapsedHeight", "component", "in", "onEnter", "onEntered", "onEntering", "onExit", "onExiting", "style", "timeout", "TransitionComponent"]);
+  var theme = (0, _useTheme.default)();
+  var timer = React.useRef();
+  var wrapperRef = React.useRef(null);
+  var autoTransitionDuration = React.useRef();
+  var collapsedHeight = typeof collapsedHeightProp === 'number' ? "".concat(collapsedHeightProp, "px") : collapsedHeightProp;
+  React.useEffect(function () {
+    return function () {
+      clearTimeout(timer.current);
+    };
+  }, []);
+
+  var handleEnter = function handleEnter(node, isAppearing) {
+    node.style.height = collapsedHeight;
+
+    if (onEnter) {
+      onEnter(node, isAppearing);
+    }
+  };
+
+  var handleEntering = function handleEntering(node, isAppearing) {
+    var wrapperHeight = wrapperRef.current ? wrapperRef.current.clientHeight : 0;
+
+    var _getTransitionProps = (0, _utils.getTransitionProps)({
+      style: style,
+      timeout: timeout
+    }, {
+      mode: 'enter'
+    }),
+        transitionDuration = _getTransitionProps.duration;
+
+    if (timeout === 'auto') {
+      var duration2 = theme.transitions.getAutoHeightDuration(wrapperHeight);
+      node.style.transitionDuration = "".concat(duration2, "ms");
+      autoTransitionDuration.current = duration2;
+    } else {
+      node.style.transitionDuration = typeof transitionDuration === 'string' ? transitionDuration : "".concat(transitionDuration, "ms");
+    }
+
+    node.style.height = "".concat(wrapperHeight, "px");
+
+    if (onEntering) {
+      onEntering(node, isAppearing);
+    }
+  };
+
+  var handleEntered = function handleEntered(node, isAppearing) {
+    node.style.height = 'auto';
+
+    if (onEntered) {
+      onEntered(node, isAppearing);
+    }
+  };
+
+  var handleExit = function handleExit(node) {
+    var wrapperHeight = wrapperRef.current ? wrapperRef.current.clientHeight : 0;
+    node.style.height = "".concat(wrapperHeight, "px");
+
+    if (onExit) {
+      onExit(node);
+    }
+  };
+
+  var handleExiting = function handleExiting(node) {
+    var wrapperHeight = wrapperRef.current ? wrapperRef.current.clientHeight : 0;
+
+    var _getTransitionProps2 = (0, _utils.getTransitionProps)({
+      style: style,
+      timeout: timeout
+    }, {
+      mode: 'exit'
+    }),
+        transitionDuration = _getTransitionProps2.duration;
+
+    if (timeout === 'auto') {
+      var duration2 = theme.transitions.getAutoHeightDuration(wrapperHeight);
+      node.style.transitionDuration = "".concat(duration2, "ms");
+      autoTransitionDuration.current = duration2;
+    } else {
+      node.style.transitionDuration = typeof transitionDuration === 'string' ? transitionDuration : "".concat(transitionDuration, "ms");
+    }
+
+    node.style.height = collapsedHeight;
+
+    if (onExiting) {
+      onExiting(node);
+    }
+  };
+
+  var addEndListener = function addEndListener(_, next) {
+    if (timeout === 'auto') {
+      timer.current = setTimeout(next, autoTransitionDuration.current || 0);
+    }
+  };
+
+  return /*#__PURE__*/React.createElement(TransitionComponent, (0, _extends2.default)({
+    in: inProp,
+    onEnter: handleEnter,
+    onEntered: handleEntered,
+    onEntering: handleEntering,
+    onExit: handleExit,
+    onExiting: handleExiting,
+    addEndListener: addEndListener,
+    timeout: timeout === 'auto' ? null : timeout
+  }, other), function (state, childProps) {
+    return /*#__PURE__*/React.createElement(Component, (0, _extends2.default)({
+      className: (0, _clsx.default)(classes.container, className, {
+        'entered': classes.entered,
+        'exited': !inProp && collapsedHeight === '0px' && classes.hidden
+      }[state]),
+      style: (0, _extends2.default)({
+        minHeight: collapsedHeight
+      }, style),
+      ref: ref
+    }, childProps), /*#__PURE__*/React.createElement("div", {
+      className: classes.wrapper,
+      ref: wrapperRef
+    }, /*#__PURE__*/React.createElement("div", {
+      className: classes.wrapperInner
+    }, children)));
+  });
+});
+"development" !== "production" ? Collapse.propTypes = {
+  // ----------------------------- Warning --------------------------------
+  // | These PropTypes are generated from the TypeScript type definitions |
+  // |     To update them edit the d.ts file and run "yarn proptypes"     |
+  // ----------------------------------------------------------------------
+
+  /**
+   * The content node to be collapsed.
+   */
+  children: _propTypes.default.node,
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */
+  classes: _propTypes.default.object,
+
+  /**
+   * @ignore
+   */
+  className: _propTypes.default.string,
+
+  /**
+   * The height of the container when collapsed.
+   */
+  collapsedHeight: _propTypes.default.oneOfType([_propTypes.default.number, _propTypes.default.string]),
+
+  /**
+   * The component used for the root node.
+   * Either a string to use a DOM element or a component.
+   */
+  component: _propTypes.default.elementType,
+
+  /**
+   * If `true`, the component will transition in.
+   */
+  in: _propTypes.default.bool,
+
+  /**
+   * @ignore
+   */
+  onEnter: _propTypes.default.func,
+
+  /**
+   * @ignore
+   */
+  onEntered: _propTypes.default.func,
+
+  /**
+   * @ignore
+   */
+  onEntering: _propTypes.default.func,
+
+  /**
+   * @ignore
+   */
+  onExit: _propTypes.default.func,
+
+  /**
+   * @ignore
+   */
+  onExiting: _propTypes.default.func,
+
+  /**
+   * @ignore
+   */
+  style: _propTypes.default.object,
+
+  /**
+   * The duration for the transition, in milliseconds.
+   * You may specify a single timeout for all transitions, or individually with an object.
+   *
+   * Set to 'auto' to automatically calculate transition time based on height.
+   */
+  timeout: _propTypes.default.oneOfType([_propTypes.default.oneOf(['auto']), _propTypes.default.number, _propTypes.default.shape({
+    appear: _propTypes.default.number,
+    enter: _propTypes.default.number,
+    exit: _propTypes.default.number
+  })])
+} : void 0;
+Collapse.muiSupportAuto = true;
+
+var _default = (0, _withStyles.default)(styles, {
+  name: 'MuiCollapse'
+})(Collapse);
+
+exports.default = _default;
+},{"@babel/runtime/helpers/esm/extends":"../node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutProperties":"../node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js","react":"../node_modules/react/index.js","clsx":"../node_modules/clsx/dist/clsx.m.js","prop-types":"../node_modules/prop-types/index.js","react-transition-group":"../node_modules/react-transition-group/esm/index.js","../styles/withStyles":"../node_modules/@material-ui/core/esm/styles/withStyles.js","../styles/transitions":"../node_modules/@material-ui/core/esm/styles/transitions.js","../transitions/utils":"../node_modules/@material-ui/core/esm/transitions/utils.js","../styles/useTheme":"../node_modules/@material-ui/core/esm/styles/useTheme.js"}],"../node_modules/@material-ui/core/esm/Collapse/StrictModeCollapse.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/extends"));
+
+var React = _interopRequireWildcard(require("react"));
+
+var _reactTransitionGroup = require("@material-ui/react-transition-group");
+
+var _utils = require("../utils");
+
+var _Collapse = _interopRequireDefault(require("./Collapse"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @ignore - internal component.
+ */
+var StrictModeCollapse = React.forwardRef(function StrictModeCollapse(props, forwardedRef) {
+  var domRef = React.useRef(null);
+  var ref = (0, _utils.useForkRef)(domRef, forwardedRef);
+  return /*#__PURE__*/React.createElement(_Collapse.default, (0, _extends2.default)({}, props, {
+    findDOMNode: function findDOMNode() {
+      return domRef.current;
+    },
+    ref: ref,
+    TransitionComponent: _reactTransitionGroup.Transition
+  }));
+});
+var _default = StrictModeCollapse;
+exports.default = _default;
+},{"@babel/runtime/helpers/esm/extends":"../node_modules/@babel/runtime/helpers/esm/extends.js","react":"../node_modules/react/index.js","@material-ui/react-transition-group":"../node_modules/@material-ui/react-transition-group/lib/esm/index.js","../utils":"../node_modules/@material-ui/core/esm/utils/index.js","./Collapse":"../node_modules/@material-ui/core/esm/Collapse/Collapse.js"}],"../node_modules/@material-ui/core/esm/Collapse/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function () {
+    return _Collapse.default;
+  }
+});
+Object.defineProperty(exports, "unstable_StrictModeCollapse", {
+  enumerable: true,
+  get: function () {
+    return _StrictModeCollapse.default;
+  }
+});
+
+var _Collapse = _interopRequireDefault(require("./Collapse"));
+
+var _StrictModeCollapse = _interopRequireDefault(require("./StrictModeCollapse"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./Collapse":"../node_modules/@material-ui/core/esm/Collapse/Collapse.js","./StrictModeCollapse":"../node_modules/@material-ui/core/esm/Collapse/StrictModeCollapse.js"}],"../node_modules/@material-ui/core/esm/Fade/Fade.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/extends"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/objectWithoutProperties"));
+
+var React = _interopRequireWildcard(require("react"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _reactTransitionGroup = require("react-transition-group");
+
+var _transitions = require("../styles/transitions");
+
+var _useTheme = _interopRequireDefault(require("../styles/useTheme"));
+
+var _utils = require("../transitions/utils");
+
+var _useForkRef = _interopRequireDefault(require("../utils/useForkRef"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var styles = {
+  entering: {
+    opacity: 1
+  },
+  entered: {
+    opacity: 1
+  }
+};
+var defaultTimeout = {
+  enter: _transitions.duration.enteringScreen,
+  exit: _transitions.duration.leavingScreen
+};
+/**
+ * The Fade transition is used by the [Modal](/components/modal/) component.
+ * It uses [react-transition-group](https://github.com/reactjs/react-transition-group) internally.
+ */
+
+var Fade = React.forwardRef(function Fade(props, ref) {
+  var children = props.children,
+      inProp = props.in,
+      onEnter = props.onEnter,
+      onExit = props.onExit,
+      style = props.style,
+      _props$TransitionComp = props.TransitionComponent,
+      TransitionComponent = _props$TransitionComp === void 0 ? _reactTransitionGroup.Transition : _props$TransitionComp,
+      _props$timeout = props.timeout,
+      timeout = _props$timeout === void 0 ? defaultTimeout : _props$timeout,
+      other = (0, _objectWithoutProperties2.default)(props, ["children", "in", "onEnter", "onExit", "style", "TransitionComponent", "timeout"]);
+  var theme = (0, _useTheme.default)();
+  var handleRef = (0, _useForkRef.default)(children.ref, ref);
+
+  var handleEnter = function handleEnter(node, isAppearing) {
+    (0, _utils.reflow)(node); // So the animation always start from the start.
+
+    var transitionProps = (0, _utils.getTransitionProps)({
+      style: style,
+      timeout: timeout
+    }, {
+      mode: 'enter'
+    });
+    node.style.webkitTransition = theme.transitions.create('opacity', transitionProps);
+    node.style.transition = theme.transitions.create('opacity', transitionProps);
+
+    if (onEnter) {
+      onEnter(node, isAppearing);
+    }
+  };
+
+  var handleExit = function handleExit(node) {
+    var transitionProps = (0, _utils.getTransitionProps)({
+      style: style,
+      timeout: timeout
+    }, {
+      mode: 'exit'
+    });
+    node.style.webkitTransition = theme.transitions.create('opacity', transitionProps);
+    node.style.transition = theme.transitions.create('opacity', transitionProps);
+
+    if (onExit) {
+      onExit(node);
+    }
+  };
+
+  return /*#__PURE__*/React.createElement(TransitionComponent, (0, _extends2.default)({
+    appear: true,
+    in: inProp,
+    onEnter: handleEnter,
+    onExit: handleExit,
+    timeout: timeout
+  }, other), function (state, childProps) {
+    return React.cloneElement(children, (0, _extends2.default)({
+      style: (0, _extends2.default)({
+        opacity: 0,
+        visibility: state === 'exited' && !inProp ? 'hidden' : undefined
+      }, styles[state], {}, style, {}, children.props.style),
+      ref: handleRef
+    }, childProps));
+  });
+});
+"development" !== "production" ? Fade.propTypes = {
+  // ----------------------------- Warning --------------------------------
+  // | These PropTypes are generated from the TypeScript type definitions |
+  // |     To update them edit the d.ts file and run "yarn proptypes"     |
+  // ----------------------------------------------------------------------
+
+  /**
+   * A single child content element.
+   */
+  children: _propTypes.default.element,
+
+  /**
+   * If `true`, the component will transition in.
+   */
+  in: _propTypes.default.bool,
+
+  /**
+   * @ignore
+   */
+  onEnter: _propTypes.default.func,
+
+  /**
+   * @ignore
+   */
+  onExit: _propTypes.default.func,
+
+  /**
+   * @ignore
+   */
+  style: _propTypes.default.object,
+
+  /**
+   * The duration for the transition, in milliseconds.
+   * You may specify a single timeout for all transitions, or individually with an object.
+   */
+  timeout: _propTypes.default.oneOfType([_propTypes.default.number, _propTypes.default.shape({
+    appear: _propTypes.default.number,
+    enter: _propTypes.default.number,
+    exit: _propTypes.default.number
+  })])
+} : void 0;
+var _default = Fade;
+exports.default = _default;
+},{"@babel/runtime/helpers/esm/extends":"../node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutProperties":"../node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js","react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-transition-group":"../node_modules/react-transition-group/esm/index.js","../styles/transitions":"../node_modules/@material-ui/core/esm/styles/transitions.js","../styles/useTheme":"../node_modules/@material-ui/core/esm/styles/useTheme.js","../transitions/utils":"../node_modules/@material-ui/core/esm/transitions/utils.js","../utils/useForkRef":"../node_modules/@material-ui/core/esm/utils/useForkRef.js"}],"../node_modules/@material-ui/core/esm/Fade/StrictModeFade.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/extends"));
+
+var React = _interopRequireWildcard(require("react"));
+
+var _reactTransitionGroup = require("@material-ui/react-transition-group");
+
+var _utils = require("../utils");
+
+var _Fade = _interopRequireDefault(require("./Fade"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @ignore - internal component.
+ */
+var StrictModeFade = React.forwardRef(function StrictModeFade(props, forwardedRef) {
+  var domRef = React.useRef(null);
+  var ref = (0, _utils.useForkRef)(domRef, forwardedRef);
+  return /*#__PURE__*/React.createElement(_Fade.default, (0, _extends2.default)({}, props, {
+    findDOMNode: function findDOMNode() {
+      return domRef.current;
+    },
+    ref: ref,
+    TransitionComponent: _reactTransitionGroup.Transition
+  }));
+});
+var _default = StrictModeFade;
+exports.default = _default;
+},{"@babel/runtime/helpers/esm/extends":"../node_modules/@babel/runtime/helpers/esm/extends.js","react":"../node_modules/react/index.js","@material-ui/react-transition-group":"../node_modules/@material-ui/react-transition-group/lib/esm/index.js","../utils":"../node_modules/@material-ui/core/esm/utils/index.js","./Fade":"../node_modules/@material-ui/core/esm/Fade/Fade.js"}],"../node_modules/@material-ui/core/esm/Fade/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function () {
+    return _Fade.default;
+  }
+});
+Object.defineProperty(exports, "unstable_StrictModeFade", {
+  enumerable: true,
+  get: function () {
+    return _StrictModeFade.default;
+  }
+});
+
+var _Fade = _interopRequireDefault(require("./Fade"));
+
+var _StrictModeFade = _interopRequireDefault(require("./StrictModeFade"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./Fade":"../node_modules/@material-ui/core/esm/Fade/Fade.js","./StrictModeFade":"../node_modules/@material-ui/core/esm/Fade/StrictModeFade.js"}],"../node_modules/@material-ui/core/esm/Slide/Slide.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.setTranslateValue = setTranslateValue;
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/extends"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/objectWithoutProperties"));
+
+var React = _interopRequireWildcard(require("react"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var ReactDOM = _interopRequireWildcard(require("react-dom"));
+
+var _debounce = _interopRequireDefault(require("../utils/debounce"));
+
+var _reactTransitionGroup = require("react-transition-group");
+
+var _utils = require("@material-ui/utils");
+
+var _useForkRef = _interopRequireDefault(require("../utils/useForkRef"));
+
+var _useTheme = _interopRequireDefault(require("../styles/useTheme"));
+
+var _transitions = require("../styles/transitions");
+
+var _utils2 = require("../transitions/utils");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// Translate the node so he can't be seen on the screen.
+// Later, we gonna translate back the node to his original location
+// with `none`.`
+function getTranslateValue(direction, node) {
+  var rect = node.getBoundingClientRect();
+  var transform;
+
+  if (node.fakeTransform) {
+    transform = node.fakeTransform;
+  } else {
+    var computedStyle = window.getComputedStyle(node);
+    transform = computedStyle.getPropertyValue('-webkit-transform') || computedStyle.getPropertyValue('transform');
+  }
+
+  var offsetX = 0;
+  var offsetY = 0;
+
+  if (transform && transform !== 'none' && typeof transform === 'string') {
+    var transformValues = transform.split('(')[1].split(')')[0].split(',');
+    offsetX = parseInt(transformValues[4], 10);
+    offsetY = parseInt(transformValues[5], 10);
+  }
+
+  if (direction === 'left') {
+    return "translateX(".concat(window.innerWidth, "px) translateX(-").concat(rect.left - offsetX, "px)");
+  }
+
+  if (direction === 'right') {
+    return "translateX(-".concat(rect.left + rect.width - offsetX, "px)");
+  }
+
+  if (direction === 'up') {
+    return "translateY(".concat(window.innerHeight, "px) translateY(-").concat(rect.top - offsetY, "px)");
+  } // direction === 'down'
+
+
+  return "translateY(-".concat(rect.top + rect.height - offsetY, "px)");
+}
+
+function setTranslateValue(direction, node) {
+  var transform = getTranslateValue(direction, node);
+
+  if (transform) {
+    node.style.webkitTransform = transform;
+    node.style.transform = transform;
+  }
+}
+
+var defaultTimeout = {
+  enter: _transitions.duration.enteringScreen,
+  exit: _transitions.duration.leavingScreen
+};
+/**
+ * The Slide transition is used by the [Drawer](/components/drawers/) component.
+ * It uses [react-transition-group](https://github.com/reactjs/react-transition-group) internally.
+ */
+
+var Slide = React.forwardRef(function Slide(props, ref) {
+  var children = props.children,
+      _props$direction = props.direction,
+      direction = _props$direction === void 0 ? 'down' : _props$direction,
+      inProp = props.in,
+      onEnter = props.onEnter,
+      onEntering = props.onEntering,
+      onExit = props.onExit,
+      onExited = props.onExited,
+      style = props.style,
+      _props$timeout = props.timeout,
+      timeout = _props$timeout === void 0 ? defaultTimeout : _props$timeout,
+      _props$TransitionComp = props.TransitionComponent,
+      TransitionComponent = _props$TransitionComp === void 0 ? _reactTransitionGroup.Transition : _props$TransitionComp,
+      other = (0, _objectWithoutProperties2.default)(props, ["children", "direction", "in", "onEnter", "onEntering", "onExit", "onExited", "style", "timeout", "TransitionComponent"]);
+  var theme = (0, _useTheme.default)();
+  var childrenRef = React.useRef(null);
+  /**
+   * used in cloneElement(children, { ref: handleRef })
+   */
+
+  var handleOwnRef = React.useCallback(function (instance) {
+    // #StrictMode ready
+    childrenRef.current = ReactDOM.findDOMNode(instance);
+  }, []);
+  var handleRefIntermediary = (0, _useForkRef.default)(children.ref, handleOwnRef);
+  var handleRef = (0, _useForkRef.default)(handleRefIntermediary, ref);
+
+  var handleEnter = function handleEnter(_, isAppearing) {
+    var node = childrenRef.current;
+    setTranslateValue(direction, node);
+    (0, _utils2.reflow)(node);
+
+    if (onEnter) {
+      onEnter(node, isAppearing);
+    }
+  };
+
+  var handleEntering = function handleEntering(_, isAppearing) {
+    var node = childrenRef.current;
+    var transitionProps = (0, _utils2.getTransitionProps)({
+      timeout: timeout,
+      style: style
+    }, {
+      mode: 'enter'
+    });
+    node.style.webkitTransition = theme.transitions.create('-webkit-transform', (0, _extends2.default)({}, transitionProps, {
+      easing: theme.transitions.easing.easeOut
+    }));
+    node.style.transition = theme.transitions.create('transform', (0, _extends2.default)({}, transitionProps, {
+      easing: theme.transitions.easing.easeOut
+    }));
+    node.style.webkitTransform = 'none';
+    node.style.transform = 'none';
+
+    if (onEntering) {
+      onEntering(node, isAppearing);
+    }
+  };
+
+  var handleExit = function handleExit() {
+    var node = childrenRef.current;
+    var transitionProps = (0, _utils2.getTransitionProps)({
+      timeout: timeout,
+      style: style
+    }, {
+      mode: 'exit'
+    });
+    node.style.webkitTransition = theme.transitions.create('-webkit-transform', (0, _extends2.default)({}, transitionProps, {
+      easing: theme.transitions.easing.sharp
+    }));
+    node.style.transition = theme.transitions.create('transform', (0, _extends2.default)({}, transitionProps, {
+      easing: theme.transitions.easing.sharp
+    }));
+    setTranslateValue(direction, node);
+
+    if (onExit) {
+      onExit(node);
+    }
+  };
+
+  var handleExited = function handleExited() {
+    var node = childrenRef.current; // No need for transitions when the component is hidden
+
+    node.style.webkitTransition = '';
+    node.style.transition = '';
+
+    if (onExited) {
+      onExited(node);
+    }
+  };
+
+  var updatePosition = React.useCallback(function () {
+    if (childrenRef.current) {
+      setTranslateValue(direction, childrenRef.current);
+    }
+  }, [direction]);
+  React.useEffect(function () {
+    // Skip configuration where the position is screen size invariant.
+    if (inProp || direction === 'down' || direction === 'right') {
+      return undefined;
+    }
+
+    var handleResize = (0, _debounce.default)(function () {
+      if (childrenRef.current) {
+        setTranslateValue(direction, childrenRef.current);
+      }
+    });
+    window.addEventListener('resize', handleResize);
+    return function () {
+      handleResize.clear();
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [direction, inProp]);
+  React.useEffect(function () {
+    if (!inProp) {
+      // We need to update the position of the drawer when the direction change and
+      // when it's hidden.
+      updatePosition();
+    }
+  }, [inProp, updatePosition]);
+  return /*#__PURE__*/React.createElement(TransitionComponent, (0, _extends2.default)({
+    onEnter: handleEnter,
+    onEntering: handleEntering,
+    onExit: handleExit,
+    onExited: handleExited,
+    appear: true,
+    in: inProp,
+    timeout: timeout
+  }, other), function (state, childProps) {
+    return React.cloneElement(children, (0, _extends2.default)({
+      ref: handleRef,
+      style: (0, _extends2.default)({
+        visibility: state === 'exited' && !inProp ? 'hidden' : undefined
+      }, style, {}, children.props.style)
+    }, childProps));
+  });
+});
+"development" !== "production" ? Slide.propTypes = {
+  // ----------------------------- Warning --------------------------------
+  // | These PropTypes are generated from the TypeScript type definitions |
+  // |     To update them edit the d.ts file and run "yarn proptypes"     |
+  // ----------------------------------------------------------------------
+
+  /**
+   * A single child content element.
+   */
+  children: _utils.elementAcceptingRef,
+
+  /**
+   * Direction the child node will enter from.
+   */
+  direction: _propTypes.default.oneOf(['down', 'left', 'right', 'up']),
+
+  /**
+   * If `true`, show the component; triggers the enter or exit animation.
+   */
+  in: _propTypes.default.bool,
+
+  /**
+   * @ignore
+   */
+  onEnter: _propTypes.default.func,
+
+  /**
+   * @ignore
+   */
+  onEntering: _propTypes.default.func,
+
+  /**
+   * @ignore
+   */
+  onExit: _propTypes.default.func,
+
+  /**
+   * @ignore
+   */
+  onExited: _propTypes.default.func,
+
+  /**
+   * @ignore
+   */
+  style: _propTypes.default.object,
+
+  /**
+   * The duration for the transition, in milliseconds.
+   * You may specify a single timeout for all transitions, or individually with an object.
+   */
+  timeout: _propTypes.default.oneOfType([_propTypes.default.number, _propTypes.default.shape({
+    appear: _propTypes.default.number,
+    enter: _propTypes.default.number,
+    exit: _propTypes.default.number
+  })])
+} : void 0;
+var _default = Slide;
+exports.default = _default;
+},{"@babel/runtime/helpers/esm/extends":"../node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutProperties":"../node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js","react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-dom":"../node_modules/react-dom/index.js","../utils/debounce":"../node_modules/@material-ui/core/esm/utils/debounce.js","react-transition-group":"../node_modules/react-transition-group/esm/index.js","@material-ui/utils":"../node_modules/@material-ui/utils/esm/index.js","../utils/useForkRef":"../node_modules/@material-ui/core/esm/utils/useForkRef.js","../styles/useTheme":"../node_modules/@material-ui/core/esm/styles/useTheme.js","../styles/transitions":"../node_modules/@material-ui/core/esm/styles/transitions.js","../transitions/utils":"../node_modules/@material-ui/core/esm/transitions/utils.js"}],"../node_modules/@material-ui/core/esm/Slide/StrictModeSlide.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/extends"));
+
+var React = _interopRequireWildcard(require("react"));
+
+var _reactTransitionGroup = require("@material-ui/react-transition-group");
+
+var _utils = require("../utils");
+
+var _Slide = _interopRequireDefault(require("./Slide"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @ignore - internal component.
+ */
+var StrictModeSlide = React.forwardRef(function StrictModeSlide(props, forwardedRef) {
+  var domRef = React.useRef(null);
+  var ref = (0, _utils.useForkRef)(domRef, forwardedRef);
+  return /*#__PURE__*/React.createElement(_Slide.default, (0, _extends2.default)({}, props, {
+    findDOMNode: function findDOMNode() {
+      return domRef.current;
+    },
+    ref: ref,
+    TransitionComponent: _reactTransitionGroup.Transition
+  }));
+});
+var _default = StrictModeSlide;
+exports.default = _default;
+},{"@babel/runtime/helpers/esm/extends":"../node_modules/@babel/runtime/helpers/esm/extends.js","react":"../node_modules/react/index.js","@material-ui/react-transition-group":"../node_modules/@material-ui/react-transition-group/lib/esm/index.js","../utils":"../node_modules/@material-ui/core/esm/utils/index.js","./Slide":"../node_modules/@material-ui/core/esm/Slide/Slide.js"}],"../node_modules/@material-ui/core/esm/Slide/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function () {
+    return _Slide.default;
+  }
+});
+Object.defineProperty(exports, "unstable_StrictModeSlide", {
+  enumerable: true,
+  get: function () {
+    return _StrictModeSlide.default;
+  }
+});
+
+var _Slide = _interopRequireDefault(require("./Slide"));
+
+var _StrictModeSlide = _interopRequireDefault(require("./StrictModeSlide"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./Slide":"../node_modules/@material-ui/core/esm/Slide/Slide.js","./StrictModeSlide":"../node_modules/@material-ui/core/esm/Slide/StrictModeSlide.js"}],"../node_modules/@material-ui/core/esm/Zoom/Zoom.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/extends"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/objectWithoutProperties"));
+
+var React = _interopRequireWildcard(require("react"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _reactTransitionGroup = require("react-transition-group");
+
+var _transitions = require("../styles/transitions");
+
+var _useTheme = _interopRequireDefault(require("../styles/useTheme"));
+
+var _utils = require("../transitions/utils");
+
+var _useForkRef = _interopRequireDefault(require("../utils/useForkRef"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var styles = {
+  entering: {
+    transform: 'none'
+  },
+  entered: {
+    transform: 'none'
+  }
+};
+var defaultTimeout = {
+  enter: _transitions.duration.enteringScreen,
+  exit: _transitions.duration.leavingScreen
+};
+/**
+ * The Zoom transition can be used for the floating variant of the
+ * [Button](/components/buttons/#floating-action-buttons) component.
+ * It uses [react-transition-group](https://github.com/reactjs/react-transition-group) internally.
+ */
+
+var Zoom = React.forwardRef(function Zoom(props, ref) {
+  var children = props.children,
+      inProp = props.in,
+      onEnter = props.onEnter,
+      onExit = props.onExit,
+      style = props.style,
+      _props$timeout = props.timeout,
+      timeout = _props$timeout === void 0 ? defaultTimeout : _props$timeout,
+      _props$TransitionComp = props.TransitionComponent,
+      TransitionComponent = _props$TransitionComp === void 0 ? _reactTransitionGroup.Transition : _props$TransitionComp,
+      other = (0, _objectWithoutProperties2.default)(props, ["children", "in", "onEnter", "onExit", "style", "timeout", "TransitionComponent"]);
+  var theme = (0, _useTheme.default)();
+  var handleRef = (0, _useForkRef.default)(children.ref, ref);
+
+  var handleEnter = function handleEnter(node, isAppearing) {
+    (0, _utils.reflow)(node); // So the animation always start from the start.
+
+    var transitionProps = (0, _utils.getTransitionProps)({
+      style: style,
+      timeout: timeout
+    }, {
+      mode: 'enter'
+    });
+    node.style.webkitTransition = theme.transitions.create('transform', transitionProps);
+    node.style.transition = theme.transitions.create('transform', transitionProps);
+
+    if (onEnter) {
+      onEnter(node, isAppearing);
+    }
+  };
+
+  var handleExit = function handleExit(node) {
+    var transitionProps = (0, _utils.getTransitionProps)({
+      style: style,
+      timeout: timeout
+    }, {
+      mode: 'exit'
+    });
+    node.style.webkitTransition = theme.transitions.create('transform', transitionProps);
+    node.style.transition = theme.transitions.create('transform', transitionProps);
+
+    if (onExit) {
+      onExit(node);
+    }
+  };
+
+  return /*#__PURE__*/React.createElement(TransitionComponent, (0, _extends2.default)({
+    appear: true,
+    in: inProp,
+    onEnter: handleEnter,
+    onExit: handleExit,
+    timeout: timeout
+  }, other), function (state, childProps) {
+    return React.cloneElement(children, (0, _extends2.default)({
+      style: (0, _extends2.default)({
+        transform: 'scale(0)',
+        visibility: state === 'exited' && !inProp ? 'hidden' : undefined
+      }, styles[state], {}, style, {}, children.props.style),
+      ref: handleRef
+    }, childProps));
+  });
+});
+"development" !== "production" ? Zoom.propTypes = {
+  // ----------------------------- Warning --------------------------------
+  // | These PropTypes are generated from the TypeScript type definitions |
+  // |     To update them edit the d.ts file and run "yarn proptypes"     |
+  // ----------------------------------------------------------------------
+
+  /**
+   * A single child content element.
+   */
+  children: _propTypes.default.element,
+
+  /**
+   * If `true`, the component will transition in.
+   */
+  in: _propTypes.default.bool,
+
+  /**
+   * @ignore
+   */
+  onEnter: _propTypes.default.func,
+
+  /**
+   * @ignore
+   */
+  onExit: _propTypes.default.func,
+
+  /**
+   * @ignore
+   */
+  style: _propTypes.default.object,
+
+  /**
+   * The duration for the transition, in milliseconds.
+   * You may specify a single timeout for all transitions, or individually with an object.
+   */
+  timeout: _propTypes.default.oneOfType([_propTypes.default.number, _propTypes.default.shape({
+    appear: _propTypes.default.number,
+    enter: _propTypes.default.number,
+    exit: _propTypes.default.number
+  })])
+} : void 0;
+var _default = Zoom;
+exports.default = _default;
+},{"@babel/runtime/helpers/esm/extends":"../node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutProperties":"../node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js","react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-transition-group":"../node_modules/react-transition-group/esm/index.js","../styles/transitions":"../node_modules/@material-ui/core/esm/styles/transitions.js","../styles/useTheme":"../node_modules/@material-ui/core/esm/styles/useTheme.js","../transitions/utils":"../node_modules/@material-ui/core/esm/transitions/utils.js","../utils/useForkRef":"../node_modules/@material-ui/core/esm/utils/useForkRef.js"}],"../node_modules/@material-ui/core/esm/Zoom/StrictModeZoom.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/extends"));
+
+var React = _interopRequireWildcard(require("react"));
+
+var _reactTransitionGroup = require("@material-ui/react-transition-group");
+
+var _utils = require("../utils");
+
+var _Zoom = _interopRequireDefault(require("./Zoom"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @ignore - internal component.
+ */
+var StrictModeZoom = React.forwardRef(function StrictModeZoom(props, forwardedRef) {
+  var domRef = React.useRef(null);
+  var ref = (0, _utils.useForkRef)(domRef, forwardedRef);
+  return /*#__PURE__*/React.createElement(_Zoom.default, (0, _extends2.default)({}, props, {
+    findDOMNode: function findDOMNode() {
+      return domRef.current;
+    },
+    ref: ref,
+    TransitionComponent: _reactTransitionGroup.Transition
+  }));
+});
+var _default = StrictModeZoom;
+exports.default = _default;
+},{"@babel/runtime/helpers/esm/extends":"../node_modules/@babel/runtime/helpers/esm/extends.js","react":"../node_modules/react/index.js","@material-ui/react-transition-group":"../node_modules/@material-ui/react-transition-group/lib/esm/index.js","../utils":"../node_modules/@material-ui/core/esm/utils/index.js","./Zoom":"../node_modules/@material-ui/core/esm/Zoom/Zoom.js"}],"../node_modules/@material-ui/core/esm/Zoom/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function () {
+    return _Zoom.default;
+  }
+});
+Object.defineProperty(exports, "unstable_StrictModeZoom", {
+  enumerable: true,
+  get: function () {
+    return _StrictModeZoom.default;
+  }
+});
+
+var _Zoom = _interopRequireDefault(require("./Zoom"));
+
+var _StrictModeZoom = _interopRequireDefault(require("./StrictModeZoom"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./Zoom":"../node_modules/@material-ui/core/esm/Zoom/Zoom.js","./StrictModeZoom":"../node_modules/@material-ui/core/esm/Zoom/StrictModeZoom.js"}],"../node_modules/@material-ui/core/esm/styles/createMuiStrictModeTheme.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = createMuiStrictModeTheme;
+
+var _utils = require("@material-ui/utils");
+
+var _createMuiTheme = _interopRequireDefault(require("./createMuiTheme"));
+
+var _Collapse = require("../Collapse");
+
+var _Fade = require("../Fade");
+
+var _Grow = require("../Grow");
+
+var _Slide = require("../Slide");
+
+var _Zoom = require("../Zoom");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function createMuiStrictModeTheme(options) {
+  return (0, _createMuiTheme.default)((0, _utils.deepmerge)({
+    props: {
+      // Collapse
+      MuiExpansionPanel: {
+        TransitionComponent: _Collapse.unstable_StrictModeCollapse
+      },
+      MuiStepContent: {
+        TransitionComponent: _Collapse.unstable_StrictModeCollapse
+      },
+      // Fade
+      MuiBackdrop: {
+        TransitionComponent: _Fade.unstable_StrictModeFade
+      },
+      MuiDialog: {
+        TransitionComponent: _Fade.unstable_StrictModeFade
+      },
+      // Grow
+      MuiPopover: {
+        TransitionComponent: _Grow.unstable_StrictModeGrow
+      },
+      MuiSnackbar: {
+        TransitionComponent: _Grow.unstable_StrictModeGrow
+      },
+      MuiTooltip: {
+        TransitionComponent: _Grow.unstable_StrictModeGrow
+      },
+      // Slide
+      MuiDrawer: {
+        TransitionComponent: _Slide.unstable_StrictModeSlide
+      },
+      // Zoom
+      MuiSpeedDial: {
+        TransitionComponent: _Zoom.unstable_StrictModeZoom
+      }
+    }
+  }, options));
+}
+},{"@material-ui/utils":"../node_modules/@material-ui/utils/esm/index.js","./createMuiTheme":"../node_modules/@material-ui/core/esm/styles/createMuiTheme.js","../Collapse":"../node_modules/@material-ui/core/esm/Collapse/index.js","../Fade":"../node_modules/@material-ui/core/esm/Fade/index.js","../Grow":"../node_modules/@material-ui/core/esm/Grow/index.js","../Slide":"../node_modules/@material-ui/core/esm/Slide/index.js","../Zoom":"../node_modules/@material-ui/core/esm/Zoom/index.js"}],"../node_modules/@material-ui/core/esm/styles/createStyles.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = createStyles;
+
+var _styles = require("@material-ui/styles");
+
+// let warnOnce = false;
+// To remove in v5
+function createStyles(styles) {
+  // warning(
+  //   warnOnce,
+  //   [
+  //     'Material-UI: createStyles from @material-ui/core/styles is deprecated.',
+  //     'Please use @material-ui/styles/createStyles',
+  //   ].join('\n'),
+  // );
+  // warnOnce = true;
+  return (0, _styles.createStyles)(styles);
+}
+},{"@material-ui/styles":"../node_modules/@material-ui/styles/esm/index.js"}],"../node_modules/@material-ui/core/esm/styles/makeStyles.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/extends"));
+
+var _styles = require("@material-ui/styles");
+
+var _defaultTheme = _interopRequireDefault(require("./defaultTheme"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function makeStyles(stylesOrCreator) {
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  return (0, _styles.makeStyles)(stylesOrCreator, (0, _extends2.default)({
+    defaultTheme: _defaultTheme.default
+  }, options));
+}
+
+var _default = makeStyles;
+exports.default = _default;
+},{"@babel/runtime/helpers/esm/extends":"../node_modules/@babel/runtime/helpers/esm/extends.js","@material-ui/styles":"../node_modules/@material-ui/styles/esm/index.js","./defaultTheme":"../node_modules/@material-ui/core/esm/styles/defaultTheme.js"}],"../node_modules/@material-ui/core/esm/styles/cssUtils.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.isUnitless = isUnitless;
+exports.getUnit = getUnit;
+exports.toUnitless = toUnitless;
+exports.convertLength = convertLength;
+exports.alignProperty = alignProperty;
+exports.fontGrid = fontGrid;
+exports.responsiveProperty = responsiveProperty;
+
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/defineProperty"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function isUnitless(value) {
+  return String(parseFloat(value)).length === String(value).length;
+} // Ported from Compass
+// https://github.com/Compass/compass/blob/master/core/stylesheets/compass/typography/_units.scss
+// Emulate the sass function "unit"
+
+
+function getUnit(input) {
+  return String(input).match(/[\d.\-+]*\s*(.*)/)[1] || '';
+} // Emulate the sass function "unitless"
+
+
+function toUnitless(length) {
+  return parseFloat(length);
+} // Convert any CSS <length> or <percentage> value to any another.
+// From https://github.com/KyleAMathews/convert-css-length
+
+
+function convertLength(baseFontSize) {
+  return function (length, toUnit) {
+    var fromUnit = getUnit(length); // Optimize for cases where `from` and `to` units are accidentally the same.
+
+    if (fromUnit === toUnit) {
+      return length;
+    } // Convert input length to pixels.
+
+
+    var pxLength = toUnitless(length);
+
+    if (fromUnit !== 'px') {
+      if (fromUnit === 'em') {
+        pxLength = toUnitless(length) * toUnitless(baseFontSize);
+      } else if (fromUnit === 'rem') {
+        pxLength = toUnitless(length) * toUnitless(baseFontSize);
+        return length;
+      }
+    } // Convert length in pixels to the output unit
+
+
+    var outputLength = pxLength;
+
+    if (toUnit !== 'px') {
+      if (toUnit === 'em') {
+        outputLength = pxLength / toUnitless(baseFontSize);
+      } else if (toUnit === 'rem') {
+        outputLength = pxLength / toUnitless(baseFontSize);
+      } else {
+        return length;
+      }
+    }
+
+    return parseFloat(outputLength.toFixed(5)) + toUnit;
+  };
+}
+
+function alignProperty(_ref) {
+  var size = _ref.size,
+      grid = _ref.grid;
+  var sizeBelow = size - size % grid;
+  var sizeAbove = sizeBelow + grid;
+  return size - sizeBelow < sizeAbove - size ? sizeBelow : sizeAbove;
+} // fontGrid finds a minimal grid (in rem) for the fontSize values so that the
+// lineHeight falls under a x pixels grid, 4px in the case of Material Design,
+// without changing the relative line height
+
+
+function fontGrid(_ref2) {
+  var lineHeight = _ref2.lineHeight,
+      pixels = _ref2.pixels,
+      htmlFontSize = _ref2.htmlFontSize;
+  return pixels / (lineHeight * htmlFontSize);
+}
+/**
+ * generate a responsive version of a given CSS property
+ * @example
+ * responsiveProperty({
+ *   cssProperty: 'fontSize',
+ *   min: 15,
+ *   max: 20,
+ *   unit: 'px',
+ *   breakpoints: [300, 600],
+ * })
+ *
+ * // this returns
+ *
+ * {
+ *   fontSize: '15px',
+ *   '@media (min-width:300px)': {
+ *     fontSize: '17.5px',
+ *   },
+ *   '@media (min-width:600px)': {
+ *     fontSize: '20px',
+ *   },
+ * }
+ *
+ * @param {Object} params
+ * @param {string} params.cssProperty - The CSS property to be made responsive
+ * @param {number} params.min - The smallest value of the CSS property
+ * @param {number} params.max - The largest value of the CSS property
+ * @param {string} [params.unit] - The unit to be used for the CSS property
+ * @param {Array.number} [params.breakpoints]  - An array of breakpoints
+ * @param {number} [params.alignStep] - Round scaled value to fall under this grid
+ * @returns {Object} responsive styles for {params.cssProperty}
+ */
+
+
+function responsiveProperty(_ref3) {
+  var cssProperty = _ref3.cssProperty,
+      min = _ref3.min,
+      max = _ref3.max,
+      _ref3$unit = _ref3.unit,
+      unit = _ref3$unit === void 0 ? 'rem' : _ref3$unit,
+      _ref3$breakpoints = _ref3.breakpoints,
+      breakpoints = _ref3$breakpoints === void 0 ? [600, 960, 1280] : _ref3$breakpoints,
+      _ref3$transform = _ref3.transform,
+      transform = _ref3$transform === void 0 ? null : _ref3$transform;
+  var output = (0, _defineProperty2.default)({}, cssProperty, "".concat(min).concat(unit));
+  var factor = (max - min) / breakpoints[breakpoints.length - 1];
+  breakpoints.forEach(function (breakpoint) {
+    var value = min + factor * breakpoint;
+
+    if (transform !== null) {
+      value = transform(value);
+    }
+
+    output["@media (min-width:".concat(breakpoint, "px)")] = (0, _defineProperty2.default)({}, cssProperty, "".concat(Math.round(value * 10000) / 10000).concat(unit));
+  });
+  return output;
+}
+},{"@babel/runtime/helpers/esm/defineProperty":"../node_modules/@babel/runtime/helpers/esm/defineProperty.js"}],"../node_modules/@material-ui/core/esm/styles/responsiveFontSizes.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = responsiveFontSizes;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/extends"));
+
+var _cssUtils = require("./cssUtils");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function responsiveFontSizes(themeInput) {
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var _options$breakpoints = options.breakpoints,
+      breakpoints = _options$breakpoints === void 0 ? ['sm', 'md', 'lg'] : _options$breakpoints,
+      _options$disableAlign = options.disableAlign,
+      disableAlign = _options$disableAlign === void 0 ? false : _options$disableAlign,
+      _options$factor = options.factor,
+      factor = _options$factor === void 0 ? 2 : _options$factor,
+      _options$variants = options.variants,
+      variants = _options$variants === void 0 ? ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'subtitle1', 'subtitle2', 'body1', 'body2', 'caption', 'button', 'overline'] : _options$variants;
+  var theme = (0, _extends2.default)({}, themeInput);
+  theme.typography = (0, _extends2.default)({}, theme.typography);
+  var typography = theme.typography; // Convert between css lengths e.g. em->px or px->rem
+  // Set the baseFontSize for your project. Defaults to 16px (also the browser default).
+
+  var convert = (0, _cssUtils.convertLength)(typography.htmlFontSize);
+  var breakpointValues = breakpoints.map(function (x) {
+    return theme.breakpoints.values[x];
+  });
+  variants.forEach(function (variant) {
+    var style = typography[variant];
+    var remFontSize = parseFloat(convert(style.fontSize, 'rem'));
+
+    if (remFontSize <= 1) {
+      return;
+    }
+
+    var maxFontSize = remFontSize;
+    var minFontSize = 1 + (maxFontSize - 1) / factor;
+    var lineHeight = style.lineHeight;
+
+    if (!(0, _cssUtils.isUnitless)(lineHeight) && !disableAlign) {
+      throw new Error(["Material-UI: unsupported non-unitless line height with grid alignment.", 'Use unitless line heights instead.'].join('\n'));
+    }
+
+    if (!(0, _cssUtils.isUnitless)(lineHeight)) {
+      // make it unitless
+      lineHeight = parseFloat(convert(lineHeight, 'rem')) / parseFloat(remFontSize);
+    }
+
+    var transform = null;
+
+    if (!disableAlign) {
+      transform = function transform(value) {
+        return (0, _cssUtils.alignProperty)({
+          size: value,
+          grid: (0, _cssUtils.fontGrid)({
+            pixels: 4,
+            lineHeight: lineHeight,
+            htmlFontSize: typography.htmlFontSize
+          })
+        });
+      };
+    }
+
+    typography[variant] = (0, _extends2.default)({}, style, {}, (0, _cssUtils.responsiveProperty)({
+      cssProperty: 'fontSize',
+      min: minFontSize,
+      max: maxFontSize,
+      unit: 'rem',
+      breakpoints: breakpointValues,
+      transform: transform
+    }));
+  });
+  return theme;
+}
+},{"@babel/runtime/helpers/esm/extends":"../node_modules/@babel/runtime/helpers/esm/extends.js","./cssUtils":"../node_modules/@material-ui/core/esm/styles/cssUtils.js"}],"../node_modules/@material-ui/core/esm/styles/styled.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/extends"));
+
+var _styles = require("@material-ui/styles");
+
+var _defaultTheme = _interopRequireDefault(require("./defaultTheme"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var styled = function styled(Component) {
+  var componentCreator = (0, _styles.styled)(Component);
+  return function (style, options) {
+    return componentCreator(style, (0, _extends2.default)({
+      defaultTheme: _defaultTheme.default
+    }, options));
+  };
+};
+
+var _default = styled;
+exports.default = _default;
+},{"@babel/runtime/helpers/esm/extends":"../node_modules/@babel/runtime/helpers/esm/extends.js","@material-ui/styles":"../node_modules/@material-ui/styles/esm/index.js","./defaultTheme":"../node_modules/@material-ui/core/esm/styles/defaultTheme.js"}],"../node_modules/@material-ui/core/esm/styles/withTheme.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _styles = require("@material-ui/styles");
+
+var _defaultTheme = _interopRequireDefault(require("./defaultTheme"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var withTheme = (0, _styles.withThemeCreator)({
+  defaultTheme: _defaultTheme.default
+});
+var _default = withTheme;
+exports.default = _default;
+},{"@material-ui/styles":"../node_modules/@material-ui/styles/esm/index.js","./defaultTheme":"../node_modules/@material-ui/core/esm/styles/defaultTheme.js"}],"../node_modules/@material-ui/core/esm/styles/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var _exportNames = {
+  createMuiTheme: true,
+  unstable_createMuiStrictModeTheme: true,
+  createStyles: true,
+  makeStyles: true,
+  responsiveFontSizes: true,
+  styled: true,
+  useTheme: true,
+  withStyles: true,
+  withTheme: true,
+  createGenerateClassName: true,
+  jssPreset: true,
+  ServerStyleSheets: true,
+  StylesProvider: true,
+  MuiThemeProvider: true,
+  ThemeProvider: true
+};
+Object.defineProperty(exports, "createMuiTheme", {
+  enumerable: true,
+  get: function () {
+    return _createMuiTheme.default;
+  }
+});
+Object.defineProperty(exports, "unstable_createMuiStrictModeTheme", {
+  enumerable: true,
+  get: function () {
+    return _createMuiStrictModeTheme.default;
+  }
+});
+Object.defineProperty(exports, "createStyles", {
+  enumerable: true,
+  get: function () {
+    return _createStyles.default;
+  }
+});
+Object.defineProperty(exports, "makeStyles", {
+  enumerable: true,
+  get: function () {
+    return _makeStyles.default;
+  }
+});
+Object.defineProperty(exports, "responsiveFontSizes", {
+  enumerable: true,
+  get: function () {
+    return _responsiveFontSizes.default;
+  }
+});
+Object.defineProperty(exports, "styled", {
+  enumerable: true,
+  get: function () {
+    return _styled.default;
+  }
+});
+Object.defineProperty(exports, "useTheme", {
+  enumerable: true,
+  get: function () {
+    return _useTheme.default;
+  }
+});
+Object.defineProperty(exports, "withStyles", {
+  enumerable: true,
+  get: function () {
+    return _withStyles.default;
+  }
+});
+Object.defineProperty(exports, "withTheme", {
+  enumerable: true,
+  get: function () {
+    return _withTheme.default;
+  }
+});
+Object.defineProperty(exports, "createGenerateClassName", {
+  enumerable: true,
+  get: function () {
+    return _styles.createGenerateClassName;
+  }
+});
+Object.defineProperty(exports, "jssPreset", {
+  enumerable: true,
+  get: function () {
+    return _styles.jssPreset;
+  }
+});
+Object.defineProperty(exports, "ServerStyleSheets", {
+  enumerable: true,
+  get: function () {
+    return _styles.ServerStyleSheets;
+  }
+});
+Object.defineProperty(exports, "StylesProvider", {
+  enumerable: true,
+  get: function () {
+    return _styles.StylesProvider;
+  }
+});
+Object.defineProperty(exports, "MuiThemeProvider", {
+  enumerable: true,
+  get: function () {
+    return _styles.ThemeProvider;
+  }
+});
+Object.defineProperty(exports, "ThemeProvider", {
+  enumerable: true,
+  get: function () {
+    return _styles.ThemeProvider;
+  }
+});
+
+var _colorManipulator = require("./colorManipulator");
+
+Object.keys(_colorManipulator).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function () {
+      return _colorManipulator[key];
+    }
+  });
+});
+
+var _createMuiTheme = _interopRequireDefault(require("./createMuiTheme"));
+
+var _createMuiStrictModeTheme = _interopRequireDefault(require("./createMuiStrictModeTheme"));
+
+var _createStyles = _interopRequireDefault(require("./createStyles"));
+
+var _makeStyles = _interopRequireDefault(require("./makeStyles"));
+
+var _responsiveFontSizes = _interopRequireDefault(require("./responsiveFontSizes"));
+
+var _styled = _interopRequireDefault(require("./styled"));
+
+var _transitions = require("./transitions");
+
+Object.keys(_transitions).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function () {
+      return _transitions[key];
+    }
+  });
+});
+
+var _useTheme = _interopRequireDefault(require("./useTheme"));
+
+var _withStyles = _interopRequireDefault(require("./withStyles"));
+
+var _withTheme = _interopRequireDefault(require("./withTheme"));
+
+var _styles = require("@material-ui/styles");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./colorManipulator":"../node_modules/@material-ui/core/esm/styles/colorManipulator.js","./createMuiTheme":"../node_modules/@material-ui/core/esm/styles/createMuiTheme.js","./createMuiStrictModeTheme":"../node_modules/@material-ui/core/esm/styles/createMuiStrictModeTheme.js","./createStyles":"../node_modules/@material-ui/core/esm/styles/createStyles.js","./makeStyles":"../node_modules/@material-ui/core/esm/styles/makeStyles.js","./responsiveFontSizes":"../node_modules/@material-ui/core/esm/styles/responsiveFontSizes.js","./styled":"../node_modules/@material-ui/core/esm/styles/styled.js","./transitions":"../node_modules/@material-ui/core/esm/styles/transitions.js","./useTheme":"../node_modules/@material-ui/core/esm/styles/useTheme.js","./withStyles":"../node_modules/@material-ui/core/esm/styles/withStyles.js","./withTheme":"../node_modules/@material-ui/core/esm/styles/withTheme.js","@material-ui/styles":"../node_modules/@material-ui/styles/esm/index.js"}],"../node_modules/@material-ui/core/esm/Table/TableContext.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var React = _interopRequireWildcard(require("react"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+/**
+ * @ignore - internal component.
+ */
+var TableContext = React.createContext();
+
+if ("development" !== 'production') {
+  TableContext.displayName = 'TableContext';
+}
+
+var _default = TableContext;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js"}],"../node_modules/@material-ui/core/esm/Table/Table.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.styles = void 0;
+
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/objectWithoutProperties"));
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/extends"));
+
+var React = _interopRequireWildcard(require("react"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _clsx = _interopRequireDefault(require("clsx"));
+
+var _withStyles = _interopRequireDefault(require("../styles/withStyles"));
+
+var _TableContext = _interopRequireDefault(require("./TableContext"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var styles = function styles(theme) {
+  return {
+    /* Styles applied to the root element. */
+    root: {
+      display: 'table',
+      width: '100%',
+      borderCollapse: 'collapse',
+      borderSpacing: 0,
+      '& caption': (0, _extends2.default)({}, theme.typography.body2, {
+        padding: theme.spacing(2),
+        color: theme.palette.text.secondary,
+        textAlign: 'left',
+        captionSide: 'bottom'
+      })
+    },
+
+    /* Styles applied to the root element if `stickyHeader={true}`. */
+    stickyHeader: {
+      borderCollapse: 'separate'
+    }
+  };
+};
+
+exports.styles = styles;
+var defaultComponent = 'table';
+var Table = React.forwardRef(function Table(props, ref) {
+  var classes = props.classes,
+      className = props.className,
+      _props$component = props.component,
+      Component = _props$component === void 0 ? defaultComponent : _props$component,
+      _props$padding = props.padding,
+      padding = _props$padding === void 0 ? 'default' : _props$padding,
+      _props$size = props.size,
+      size = _props$size === void 0 ? 'medium' : _props$size,
+      _props$stickyHeader = props.stickyHeader,
+      stickyHeader = _props$stickyHeader === void 0 ? false : _props$stickyHeader,
+      other = (0, _objectWithoutProperties2.default)(props, ["classes", "className", "component", "padding", "size", "stickyHeader"]);
+  var table = React.useMemo(function () {
+    return {
+      padding: padding,
+      size: size,
+      stickyHeader: stickyHeader
+    };
+  }, [padding, size, stickyHeader]);
+  return /*#__PURE__*/React.createElement(_TableContext.default.Provider, {
+    value: table
+  }, /*#__PURE__*/React.createElement(Component, (0, _extends2.default)({
+    role: Component === defaultComponent ? null : 'table',
+    ref: ref,
+    className: (0, _clsx.default)(classes.root, className, stickyHeader && classes.stickyHeader)
+  }, other)));
+});
+"development" !== "production" ? Table.propTypes = {
+  /**
+   * The content of the table, normally `TableHead` and `TableBody`.
+   */
+  children: _propTypes.default.node.isRequired,
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */
+  classes: _propTypes.default.object.isRequired,
+
+  /**
+   * @ignore
+   */
+  className: _propTypes.default.string,
+
+  /**
+   * The component used for the root node.
+   * Either a string to use a DOM element or a component.
+   */
+  component: _propTypes.default.elementType,
+
+  /**
+   * Allows TableCells to inherit padding of the Table.
+   */
+  padding: _propTypes.default.oneOf(['default', 'checkbox', 'none']),
+
+  /**
+   * Allows TableCells to inherit size of the Table.
+   */
+  size: _propTypes.default.oneOf(['small', 'medium']),
+
+  /**
+   * Set the header sticky.
+   *
+   * ⚠️ It doesn't work with IE 11.
+   */
+  stickyHeader: _propTypes.default.bool
+} : void 0;
+
+var _default = (0, _withStyles.default)(styles, {
+  name: 'MuiTable'
+})(Table);
+
+exports.default = _default;
+},{"@babel/runtime/helpers/esm/objectWithoutProperties":"../node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js","@babel/runtime/helpers/esm/extends":"../node_modules/@babel/runtime/helpers/esm/extends.js","react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","clsx":"../node_modules/clsx/dist/clsx.m.js","../styles/withStyles":"../node_modules/@material-ui/core/esm/styles/withStyles.js","./TableContext":"../node_modules/@material-ui/core/esm/Table/TableContext.js"}],"../node_modules/@material-ui/core/esm/Table/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function () {
+    return _Table.default;
+  }
+});
+
+var _Table = _interopRequireDefault(require("./Table"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./Table":"../node_modules/@material-ui/core/esm/Table/Table.js"}],"../node_modules/@material-ui/core/esm/Table/Tablelvl2Context.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var React = _interopRequireWildcard(require("react"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+/**
+ * @ignore - internal component.
+ */
+var Tablelvl2Context = React.createContext();
+
+if ("development" !== 'production') {
+  Tablelvl2Context.displayName = 'Tablelvl2Context';
+}
+
+var _default = Tablelvl2Context;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js"}],"../node_modules/@material-ui/core/esm/TableBody/TableBody.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.styles = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/extends"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/objectWithoutProperties"));
+
+var React = _interopRequireWildcard(require("react"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _clsx = _interopRequireDefault(require("clsx"));
+
+var _withStyles = _interopRequireDefault(require("../styles/withStyles"));
+
+var _Tablelvl2Context = _interopRequireDefault(require("../Table/Tablelvl2Context"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var styles = {
+  /* Styles applied to the root element. */
+  root: {
+    display: 'table-row-group'
+  }
+};
+exports.styles = styles;
+var tablelvl2 = {
+  variant: 'body'
+};
+var defaultComponent = 'tbody';
+var TableBody = React.forwardRef(function TableBody(props, ref) {
+  var classes = props.classes,
+      className = props.className,
+      _props$component = props.component,
+      Component = _props$component === void 0 ? defaultComponent : _props$component,
+      other = (0, _objectWithoutProperties2.default)(props, ["classes", "className", "component"]);
+  return /*#__PURE__*/React.createElement(_Tablelvl2Context.default.Provider, {
+    value: tablelvl2
+  }, /*#__PURE__*/React.createElement(Component, (0, _extends2.default)({
+    className: (0, _clsx.default)(classes.root, className),
+    ref: ref,
+    role: Component === defaultComponent ? null : 'rowgroup'
+  }, other)));
+});
+"development" !== "production" ? TableBody.propTypes = {
+  /**
+   * The content of the component, normally `TableRow`.
+   */
+  children: _propTypes.default.node,
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */
+  classes: _propTypes.default.object.isRequired,
+
+  /**
+   * @ignore
+   */
+  className: _propTypes.default.string,
+
+  /**
+   * The component used for the root node.
+   * Either a string to use a DOM element or a component.
+   */
+  component: _propTypes.default.elementType
+} : void 0;
+
+var _default = (0, _withStyles.default)(styles, {
+  name: 'MuiTableBody'
+})(TableBody);
+
+exports.default = _default;
+},{"@babel/runtime/helpers/esm/extends":"../node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutProperties":"../node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js","react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","clsx":"../node_modules/clsx/dist/clsx.m.js","../styles/withStyles":"../node_modules/@material-ui/core/esm/styles/withStyles.js","../Table/Tablelvl2Context":"../node_modules/@material-ui/core/esm/Table/Tablelvl2Context.js"}],"../node_modules/@material-ui/core/esm/TableBody/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function () {
+    return _TableBody.default;
+  }
+});
+
+var _TableBody = _interopRequireDefault(require("./TableBody"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./TableBody":"../node_modules/@material-ui/core/esm/TableBody/TableBody.js"}],"../node_modules/@material-ui/core/esm/TableCell/TableCell.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.styles = void 0;
+
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/objectWithoutProperties"));
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/extends"));
+
+var React = _interopRequireWildcard(require("react"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _clsx = _interopRequireDefault(require("clsx"));
+
+var _withStyles = _interopRequireDefault(require("../styles/withStyles"));
+
+var _capitalize = _interopRequireDefault(require("../utils/capitalize"));
+
+var _colorManipulator = require("../styles/colorManipulator");
+
+var _TableContext = _interopRequireDefault(require("../Table/TableContext"));
+
+var _Tablelvl2Context = _interopRequireDefault(require("../Table/Tablelvl2Context"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var styles = function styles(theme) {
+  return {
+    /* Styles applied to the root element. */
+    root: (0, _extends2.default)({}, theme.typography.body2, {
+      display: 'table-cell',
+      verticalAlign: 'inherit',
+      // Workaround for a rendering bug with spanned columns in Chrome 62.0.
+      // Removes the alpha (sets it to 1), and lightens or darkens the theme color.
+      borderBottom: "1px solid\n    ".concat(theme.palette.type === 'light' ? (0, _colorManipulator.lighten)((0, _colorManipulator.fade)(theme.palette.divider, 1), 0.88) : (0, _colorManipulator.darken)((0, _colorManipulator.fade)(theme.palette.divider, 1), 0.68)),
+      textAlign: 'left',
+      padding: 16
+    }),
+
+    /* Styles applied to the root element if `variant="head"` or `context.table.head`. */
+    head: {
+      color: theme.palette.text.primary,
+      lineHeight: theme.typography.pxToRem(24),
+      fontWeight: theme.typography.fontWeightMedium
+    },
+
+    /* Styles applied to the root element if `variant="body"` or `context.table.body`. */
+    body: {
+      color: theme.palette.text.primary
+    },
+
+    /* Styles applied to the root element if `variant="footer"` or `context.table.footer`. */
+    footer: {
+      color: theme.palette.text.secondary,
+      lineHeight: theme.typography.pxToRem(21),
+      fontSize: theme.typography.pxToRem(12)
+    },
+
+    /* Styles applied to the root element if `size="small"`. */
+    sizeSmall: {
+      padding: '6px 24px 6px 16px',
+      '&:last-child': {
+        paddingRight: 16
+      },
+      '&$paddingCheckbox': {
+        width: 24,
+        // prevent the checkbox column from growing
+        padding: '0px 12px 0 16px',
+        '&:last-child': {
+          paddingLeft: 12,
+          paddingRight: 16
+        },
+        '& > *': {
+          padding: 0
+        }
+      }
+    },
+
+    /* Styles applied to the root element if `padding="checkbox"`. */
+    paddingCheckbox: {
+      width: 48,
+      // prevent the checkbox column from growing
+      padding: '0 0 0 4px',
+      '&:last-child': {
+        paddingLeft: 0,
+        paddingRight: 4
+      }
+    },
+
+    /* Styles applied to the root element if `padding="none"`. */
+    paddingNone: {
+      padding: 0,
+      '&:last-child': {
+        padding: 0
+      }
+    },
+
+    /* Styles applied to the root element if `align="left"`. */
+    alignLeft: {
+      textAlign: 'left'
+    },
+
+    /* Styles applied to the root element if `align="center"`. */
+    alignCenter: {
+      textAlign: 'center'
+    },
+
+    /* Styles applied to the root element if `align="right"`. */
+    alignRight: {
+      textAlign: 'right',
+      flexDirection: 'row-reverse'
+    },
+
+    /* Styles applied to the root element if `align="justify"`. */
+    alignJustify: {
+      textAlign: 'justify'
+    },
+
+    /* Styles applied to the root element if `context.table.stickyHeader={true}`. */
+    stickyHeader: {
+      position: 'sticky',
+      top: 0,
+      left: 0,
+      zIndex: 2,
+      backgroundColor: theme.palette.background.default
+    }
+  };
+};
+/**
+ * The component renders a `<th>` element when the parent context is a header
+ * or otherwise a `<td>` element.
+ */
+
+
+exports.styles = styles;
+var TableCell = React.forwardRef(function TableCell(props, ref) {
+  var _props$align = props.align,
+      align = _props$align === void 0 ? 'inherit' : _props$align,
+      classes = props.classes,
+      className = props.className,
+      component = props.component,
+      paddingProp = props.padding,
+      scopeProp = props.scope,
+      sizeProp = props.size,
+      sortDirection = props.sortDirection,
+      variantProp = props.variant,
+      other = (0, _objectWithoutProperties2.default)(props, ["align", "classes", "className", "component", "padding", "scope", "size", "sortDirection", "variant"]);
+  var table = React.useContext(_TableContext.default);
+  var tablelvl2 = React.useContext(_Tablelvl2Context.default);
+  var isHeadCell = tablelvl2 && tablelvl2.variant === 'head';
+  var role;
+  var Component;
+
+  if (component) {
+    Component = component;
+    role = isHeadCell ? 'columnheader' : 'cell';
+  } else {
+    Component = isHeadCell ? 'th' : 'td';
+  }
+
+  var scope = scopeProp;
+
+  if (!scope && isHeadCell) {
+    scope = 'col';
+  }
+
+  var padding = paddingProp || (table && table.padding ? table.padding : 'default');
+  var size = sizeProp || (table && table.size ? table.size : 'medium');
+  var variant = variantProp || tablelvl2 && tablelvl2.variant;
+  var ariaSort = null;
+
+  if (sortDirection) {
+    ariaSort = sortDirection === 'asc' ? 'ascending' : 'descending';
+  }
+
+  return /*#__PURE__*/React.createElement(Component, (0, _extends2.default)({
+    ref: ref,
+    className: (0, _clsx.default)(classes.root, classes[variant], className, align !== 'inherit' && classes["align".concat((0, _capitalize.default)(align))], padding !== 'default' && classes["padding".concat((0, _capitalize.default)(padding))], size !== 'medium' && classes["size".concat((0, _capitalize.default)(size))], variant === 'head' && table && table.stickyHeader && classes.stickyHeader),
+    "aria-sort": ariaSort,
+    role: role,
+    scope: scope
+  }, other));
+});
+"development" !== "production" ? TableCell.propTypes = {
+  // ----------------------------- Warning --------------------------------
+  // | These PropTypes are generated from the TypeScript type definitions |
+  // |     To update them edit the d.ts file and run "yarn proptypes"     |
+  // ----------------------------------------------------------------------
+
+  /**
+   * Set the text-align on the table cell content.
+   *
+   * Monetary or generally number fields **should be right aligned** as that allows
+   * you to add them up quickly in your head without having to worry about decimals.
+   */
+  align: _propTypes.default.oneOf(['center', 'inherit', 'justify', 'left', 'right']),
+
+  /**
+   * The table cell contents.
+   */
+  children: _propTypes.default.node,
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */
+  classes: _propTypes.default.object,
+
+  /**
+   * @ignore
+   */
+  className: _propTypes.default.string,
+
+  /**
+   * The component used for the root node.
+   * Either a string to use a DOM element or a component.
+   */
+  component: _propTypes.default.elementType,
+
+  /**
+   * Sets the padding applied to the cell.
+   * By default, the Table parent component set the value (`default`).
+   */
+  padding: _propTypes.default.oneOf(['checkbox', 'default', 'none']),
+
+  /**
+   * Set scope attribute.
+   */
+  scope: _propTypes.default.string,
+
+  /**
+   * Specify the size of the cell.
+   * By default, the Table parent component set the value (`medium`).
+   */
+  size: _propTypes.default.oneOf(['medium', 'small']),
+
+  /**
+   * Set aria-sort direction.
+   */
+  sortDirection: _propTypes.default.oneOf(['asc', 'desc', false]),
+
+  /**
+   * Specify the cell type.
+   * By default, the TableHead, TableBody or TableFooter parent component set the value.
+   */
+  variant: _propTypes.default.oneOf(['body', 'footer', 'head'])
+} : void 0;
+
+var _default = (0, _withStyles.default)(styles, {
+  name: 'MuiTableCell'
+})(TableCell);
+
+exports.default = _default;
+},{"@babel/runtime/helpers/esm/objectWithoutProperties":"../node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js","@babel/runtime/helpers/esm/extends":"../node_modules/@babel/runtime/helpers/esm/extends.js","react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","clsx":"../node_modules/clsx/dist/clsx.m.js","../styles/withStyles":"../node_modules/@material-ui/core/esm/styles/withStyles.js","../utils/capitalize":"../node_modules/@material-ui/core/esm/utils/capitalize.js","../styles/colorManipulator":"../node_modules/@material-ui/core/esm/styles/colorManipulator.js","../Table/TableContext":"../node_modules/@material-ui/core/esm/Table/TableContext.js","../Table/Tablelvl2Context":"../node_modules/@material-ui/core/esm/Table/Tablelvl2Context.js"}],"../node_modules/@material-ui/core/esm/TableCell/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function () {
+    return _TableCell.default;
+  }
+});
+
+var _TableCell = _interopRequireDefault(require("./TableCell"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./TableCell":"../node_modules/@material-ui/core/esm/TableCell/TableCell.js"}],"../node_modules/@material-ui/core/esm/TableContainer/TableContainer.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.styles = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/extends"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/objectWithoutProperties"));
+
+var React = _interopRequireWildcard(require("react"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _clsx = _interopRequireDefault(require("clsx"));
+
+var _withStyles = _interopRequireDefault(require("../styles/withStyles"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var styles = {
+  /* Styles applied to the root element. */
+  root: {
+    width: '100%',
+    overflowX: 'auto'
+  }
+};
+exports.styles = styles;
+var TableContainer = React.forwardRef(function TableContainer(props, ref) {
+  var classes = props.classes,
+      className = props.className,
+      _props$component = props.component,
+      Component = _props$component === void 0 ? 'div' : _props$component,
+      other = (0, _objectWithoutProperties2.default)(props, ["classes", "className", "component"]);
+  return /*#__PURE__*/React.createElement(Component, (0, _extends2.default)({
+    ref: ref,
+    className: (0, _clsx.default)(classes.root, className)
+  }, other));
+});
+"development" !== "production" ? TableContainer.propTypes = {
+  /**
+   * The table itself, normally `<Table />`
+   */
+  children: _propTypes.default.node,
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */
+  classes: _propTypes.default.object.isRequired,
+
+  /**
+   * @ignore
+   */
+  className: _propTypes.default.string,
+
+  /**
+   * The component used for the root node.
+   * Either a string to use a DOM element or a component.
+   */
+  component: _propTypes.default.elementType
+} : void 0;
+
+var _default = (0, _withStyles.default)(styles, {
+  name: 'MuiTableContainer'
+})(TableContainer);
+
+exports.default = _default;
+},{"@babel/runtime/helpers/esm/extends":"../node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutProperties":"../node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js","react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","clsx":"../node_modules/clsx/dist/clsx.m.js","../styles/withStyles":"../node_modules/@material-ui/core/esm/styles/withStyles.js"}],"../node_modules/@material-ui/core/esm/TableContainer/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function () {
+    return _TableContainer.default;
+  }
+});
+
+var _TableContainer = _interopRequireDefault(require("./TableContainer"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./TableContainer":"../node_modules/@material-ui/core/esm/TableContainer/TableContainer.js"}],"../node_modules/@material-ui/core/esm/TableHead/TableHead.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.styles = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/extends"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/objectWithoutProperties"));
+
+var React = _interopRequireWildcard(require("react"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _clsx = _interopRequireDefault(require("clsx"));
+
+var _withStyles = _interopRequireDefault(require("../styles/withStyles"));
+
+var _Tablelvl2Context = _interopRequireDefault(require("../Table/Tablelvl2Context"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var styles = {
+  /* Styles applied to the root element. */
+  root: {
+    display: 'table-header-group'
+  }
+};
+exports.styles = styles;
+var tablelvl2 = {
+  variant: 'head'
+};
+var defaultComponent = 'thead';
+var TableHead = React.forwardRef(function TableHead(props, ref) {
+  var classes = props.classes,
+      className = props.className,
+      _props$component = props.component,
+      Component = _props$component === void 0 ? defaultComponent : _props$component,
+      other = (0, _objectWithoutProperties2.default)(props, ["classes", "className", "component"]);
+  return /*#__PURE__*/React.createElement(_Tablelvl2Context.default.Provider, {
+    value: tablelvl2
+  }, /*#__PURE__*/React.createElement(Component, (0, _extends2.default)({
+    className: (0, _clsx.default)(classes.root, className),
+    ref: ref,
+    role: Component === defaultComponent ? null : 'rowgroup'
+  }, other)));
+});
+"development" !== "production" ? TableHead.propTypes = {
+  /**
+   * The content of the component, normally `TableRow`.
+   */
+  children: _propTypes.default.node,
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */
+  classes: _propTypes.default.object.isRequired,
+
+  /**
+   * @ignore
+   */
+  className: _propTypes.default.string,
+
+  /**
+   * The component used for the root node.
+   * Either a string to use a DOM element or a component.
+   */
+  component: _propTypes.default.elementType
+} : void 0;
+
+var _default = (0, _withStyles.default)(styles, {
+  name: 'MuiTableHead'
+})(TableHead);
+
+exports.default = _default;
+},{"@babel/runtime/helpers/esm/extends":"../node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutProperties":"../node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js","react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","clsx":"../node_modules/clsx/dist/clsx.m.js","../styles/withStyles":"../node_modules/@material-ui/core/esm/styles/withStyles.js","../Table/Tablelvl2Context":"../node_modules/@material-ui/core/esm/Table/Tablelvl2Context.js"}],"../node_modules/@material-ui/core/esm/TableHead/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function () {
+    return _TableHead.default;
+  }
+});
+
+var _TableHead = _interopRequireDefault(require("./TableHead"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./TableHead":"../node_modules/@material-ui/core/esm/TableHead/TableHead.js"}],"../node_modules/@material-ui/core/esm/TableRow/TableRow.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.styles = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/extends"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/objectWithoutProperties"));
+
+var React = _interopRequireWildcard(require("react"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _clsx = _interopRequireDefault(require("clsx"));
+
+var _withStyles = _interopRequireDefault(require("../styles/withStyles"));
+
+var _Tablelvl2Context = _interopRequireDefault(require("../Table/Tablelvl2Context"));
+
+var _colorManipulator = require("../styles/colorManipulator");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var styles = function styles(theme) {
+  return {
+    /* Styles applied to the root element. */
+    root: {
+      color: 'inherit',
+      display: 'table-row',
+      verticalAlign: 'middle',
+      // We disable the focus ring for mouse, touch and keyboard users.
+      outline: 0,
+      '&$hover:hover': {
+        backgroundColor: theme.palette.action.hover
+      },
+      '&$selected, &$selected:hover': {
+        backgroundColor: (0, _colorManipulator.fade)(theme.palette.secondary.main, theme.palette.action.selectedOpacity)
+      }
+    },
+
+    /* Pseudo-class applied to the root element if `selected={true}`. */
+    selected: {},
+
+    /* Pseudo-class applied to the root element if `hover={true}`. */
+    hover: {},
+
+    /* Styles applied to the root element if table variant="head". */
+    head: {},
+
+    /* Styles applied to the root element if table variant="footer". */
+    footer: {}
+  };
+};
+
+exports.styles = styles;
+var defaultComponent = 'tr';
+/**
+ * Will automatically set dynamic row height
+ * based on the material table element parent (head, body, etc).
+ */
+
+var TableRow = React.forwardRef(function TableRow(props, ref) {
+  var classes = props.classes,
+      className = props.className,
+      _props$component = props.component,
+      Component = _props$component === void 0 ? defaultComponent : _props$component,
+      _props$hover = props.hover,
+      hover = _props$hover === void 0 ? false : _props$hover,
+      _props$selected = props.selected,
+      selected = _props$selected === void 0 ? false : _props$selected,
+      other = (0, _objectWithoutProperties2.default)(props, ["classes", "className", "component", "hover", "selected"]);
+  var tablelvl2 = React.useContext(_Tablelvl2Context.default);
+  return /*#__PURE__*/React.createElement(Component, (0, _extends2.default)({
+    ref: ref,
+    className: (0, _clsx.default)(classes.root, className, tablelvl2 && {
+      'head': classes.head,
+      'footer': classes.footer
+    }[tablelvl2.variant], hover && classes.hover, selected && classes.selected),
+    role: Component === defaultComponent ? null : 'row'
+  }, other));
+});
+"development" !== "production" ? TableRow.propTypes = {
+  /**
+   * Should be valid <tr> children such as `TableCell`.
+   */
+  children: _propTypes.default.node,
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */
+  classes: _propTypes.default.object.isRequired,
+
+  /**
+   * @ignore
+   */
+  className: _propTypes.default.string,
+
+  /**
+   * The component used for the root node.
+   * Either a string to use a DOM element or a component.
+   */
+  component: _propTypes.default.elementType,
+
+  /**
+   * If `true`, the table row will shade on hover.
+   */
+  hover: _propTypes.default.bool,
+
+  /**
+   * If `true`, the table row will have the selected shading.
+   */
+  selected: _propTypes.default.bool
+} : void 0;
+
+var _default = (0, _withStyles.default)(styles, {
+  name: 'MuiTableRow'
+})(TableRow);
+
+exports.default = _default;
+},{"@babel/runtime/helpers/esm/extends":"../node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutProperties":"../node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js","react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","clsx":"../node_modules/clsx/dist/clsx.m.js","../styles/withStyles":"../node_modules/@material-ui/core/esm/styles/withStyles.js","../Table/Tablelvl2Context":"../node_modules/@material-ui/core/esm/Table/Tablelvl2Context.js","../styles/colorManipulator":"../node_modules/@material-ui/core/esm/styles/colorManipulator.js"}],"../node_modules/@material-ui/core/esm/TableRow/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function () {
+    return _TableRow.default;
+  }
+});
+
+var _TableRow = _interopRequireDefault(require("./TableRow"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./TableRow":"../node_modules/@material-ui/core/esm/TableRow/TableRow.js"}],"../node_modules/@material-ui/core/esm/Toolbar/Toolbar.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.styles = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/extends"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/objectWithoutProperties"));
+
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/defineProperty"));
+
+var React = _interopRequireWildcard(require("react"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _clsx = _interopRequireDefault(require("clsx"));
+
+var _withStyles = _interopRequireDefault(require("../styles/withStyles"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var styles = function styles(theme) {
+  return {
+    /* Styles applied to the root element. */
+    root: {
+      position: 'relative',
+      display: 'flex',
+      alignItems: 'center'
+    },
+
+    /* Styles applied to the root element if `disableGutters={false}`. */
+    gutters: (0, _defineProperty2.default)({
+      paddingLeft: theme.spacing(2),
+      paddingRight: theme.spacing(2)
+    }, theme.breakpoints.up('sm'), {
+      paddingLeft: theme.spacing(3),
+      paddingRight: theme.spacing(3)
+    }),
+
+    /* Styles applied to the root element if `variant="regular"`. */
+    regular: theme.mixins.toolbar,
+
+    /* Styles applied to the root element if `variant="dense"`. */
+    dense: {
+      minHeight: 48
+    }
+  };
+};
+
+exports.styles = styles;
+var Toolbar = React.forwardRef(function Toolbar(props, ref) {
+  var classes = props.classes,
+      className = props.className,
+      _props$component = props.component,
+      Component = _props$component === void 0 ? 'div' : _props$component,
+      _props$disableGutters = props.disableGutters,
+      disableGutters = _props$disableGutters === void 0 ? false : _props$disableGutters,
+      _props$variant = props.variant,
+      variant = _props$variant === void 0 ? 'regular' : _props$variant,
+      other = (0, _objectWithoutProperties2.default)(props, ["classes", "className", "component", "disableGutters", "variant"]);
+  return /*#__PURE__*/React.createElement(Component, (0, _extends2.default)({
+    className: (0, _clsx.default)(classes.root, classes[variant], className, !disableGutters && classes.gutters),
+    ref: ref
+  }, other));
+});
+"development" !== "production" ? Toolbar.propTypes = {
+  /**
+   * Toolbar children, usually a mixture of `IconButton`, `Button` and `Typography`.
+   */
+  children: _propTypes.default.node,
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */
+  classes: _propTypes.default.object.isRequired,
+
+  /**
+   * @ignore
+   */
+  className: _propTypes.default.string,
+
+  /**
+   * The component used for the root node.
+   * Either a string to use a DOM element or a component.
+   */
+  component: _propTypes.default.elementType,
+
+  /**
+   * If `true`, disables gutter padding.
+   */
+  disableGutters: _propTypes.default.bool,
+
+  /**
+   * The variant to use.
+   */
+  variant: _propTypes.default.oneOf(['regular', 'dense'])
+} : void 0;
+
+var _default = (0, _withStyles.default)(styles, {
+  name: 'MuiToolbar'
+})(Toolbar);
+
+exports.default = _default;
+},{"@babel/runtime/helpers/esm/extends":"../node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutProperties":"../node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js","@babel/runtime/helpers/esm/defineProperty":"../node_modules/@babel/runtime/helpers/esm/defineProperty.js","react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","clsx":"../node_modules/clsx/dist/clsx.m.js","../styles/withStyles":"../node_modules/@material-ui/core/esm/styles/withStyles.js"}],"../node_modules/@material-ui/core/esm/Toolbar/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function () {
+    return _Toolbar.default;
+  }
+});
+
+var _Toolbar = _interopRequireDefault(require("./Toolbar"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./Toolbar":"../node_modules/@material-ui/core/esm/Toolbar/Toolbar.js"}],"../node_modules/@material-ui/core/esm/internal/svg-icons/KeyboardArrowLeft.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var React = _interopRequireWildcard(require("react"));
+
+var _createSvgIcon = _interopRequireDefault(require("../../utils/createSvgIcon"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+/**
+ * @ignore - internal component.
+ */
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/React.createElement("path", {
+  d: "M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"
+}), 'KeyboardArrowLeft');
+
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","../../utils/createSvgIcon":"../node_modules/@material-ui/core/esm/utils/createSvgIcon.js"}],"../node_modules/@material-ui/core/esm/internal/svg-icons/KeyboardArrowRight.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var React = _interopRequireWildcard(require("react"));
+
+var _createSvgIcon = _interopRequireDefault(require("../../utils/createSvgIcon"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+/**
+ * @ignore - internal component.
+ */
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/React.createElement("path", {
+  d: "M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"
+}), 'KeyboardArrowRight');
+
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","../../utils/createSvgIcon":"../node_modules/@material-ui/core/esm/utils/createSvgIcon.js"}],"../node_modules/@material-ui/core/esm/IconButton/IconButton.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.styles = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/extends"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/objectWithoutProperties"));
+
+var React = _interopRequireWildcard(require("react"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _clsx = _interopRequireDefault(require("clsx"));
+
+var _utils = require("@material-ui/utils");
+
+var _withStyles = _interopRequireDefault(require("../styles/withStyles"));
+
+var _colorManipulator = require("../styles/colorManipulator");
+
+var _ButtonBase = _interopRequireDefault(require("../ButtonBase"));
+
+var _capitalize = _interopRequireDefault(require("../utils/capitalize"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var styles = function styles(theme) {
+  return {
+    /* Styles applied to the root element. */
+    root: {
+      textAlign: 'center',
+      flex: '0 0 auto',
+      fontSize: theme.typography.pxToRem(24),
+      padding: 12,
+      borderRadius: '50%',
+      overflow: 'visible',
+      // Explicitly set the default value to solve a bug on IE 11.
+      color: theme.palette.action.active,
+      transition: theme.transitions.create('background-color', {
+        duration: theme.transitions.duration.shortest
+      }),
+      '&:hover': {
+        backgroundColor: (0, _colorManipulator.fade)(theme.palette.action.active, theme.palette.action.hoverOpacity),
+        // Reset on touch devices, it doesn't add specificity
+        '@media (hover: none)': {
+          backgroundColor: 'transparent'
+        }
+      },
+      '&$disabled': {
+        backgroundColor: 'transparent',
+        color: theme.palette.action.disabled
+      }
+    },
+
+    /* Styles applied to the root element if `edge="start"`. */
+    edgeStart: {
+      marginLeft: -12,
+      '$sizeSmall&': {
+        marginLeft: -3
+      }
+    },
+
+    /* Styles applied to the root element if `edge="end"`. */
+    edgeEnd: {
+      marginRight: -12,
+      '$sizeSmall&': {
+        marginRight: -3
+      }
+    },
+
+    /* Styles applied to the root element if `color="inherit"`. */
+    colorInherit: {
+      color: 'inherit'
+    },
+
+    /* Styles applied to the root element if `color="primary"`. */
+    colorPrimary: {
+      color: theme.palette.primary.main,
+      '&:hover': {
+        backgroundColor: (0, _colorManipulator.fade)(theme.palette.primary.main, theme.palette.action.hoverOpacity),
+        // Reset on touch devices, it doesn't add specificity
+        '@media (hover: none)': {
+          backgroundColor: 'transparent'
+        }
+      }
+    },
+
+    /* Styles applied to the root element if `color="secondary"`. */
+    colorSecondary: {
+      color: theme.palette.secondary.main,
+      '&:hover': {
+        backgroundColor: (0, _colorManipulator.fade)(theme.palette.secondary.main, theme.palette.action.hoverOpacity),
+        // Reset on touch devices, it doesn't add specificity
+        '@media (hover: none)': {
+          backgroundColor: 'transparent'
+        }
+      }
+    },
+
+    /* Pseudo-class applied to the root element if `disabled={true}`. */
+    disabled: {},
+
+    /* Styles applied to the root element if `size="small"`. */
+    sizeSmall: {
+      padding: 3,
+      fontSize: theme.typography.pxToRem(18)
+    },
+
+    /* Styles applied to the children container element. */
+    label: {
+      width: '100%',
+      display: 'flex',
+      alignItems: 'inherit',
+      justifyContent: 'inherit'
+    }
+  };
+};
+/**
+ * Refer to the [Icons](/components/icons/) section of the documentation
+ * regarding the available icon options.
+ */
+
+
+exports.styles = styles;
+var IconButton = React.forwardRef(function IconButton(props, ref) {
+  var _props$edge = props.edge,
+      edge = _props$edge === void 0 ? false : _props$edge,
+      children = props.children,
+      classes = props.classes,
+      className = props.className,
+      _props$color = props.color,
+      color = _props$color === void 0 ? 'default' : _props$color,
+      _props$disabled = props.disabled,
+      disabled = _props$disabled === void 0 ? false : _props$disabled,
+      _props$disableFocusRi = props.disableFocusRipple,
+      disableFocusRipple = _props$disableFocusRi === void 0 ? false : _props$disableFocusRi,
+      _props$size = props.size,
+      size = _props$size === void 0 ? 'medium' : _props$size,
+      other = (0, _objectWithoutProperties2.default)(props, ["edge", "children", "classes", "className", "color", "disabled", "disableFocusRipple", "size"]);
+  return /*#__PURE__*/React.createElement(_ButtonBase.default, (0, _extends2.default)({
+    className: (0, _clsx.default)(classes.root, className, color !== 'default' && classes["color".concat((0, _capitalize.default)(color))], disabled && classes.disabled, size === "small" && classes["size".concat((0, _capitalize.default)(size))], {
+      'start': classes.edgeStart,
+      'end': classes.edgeEnd
+    }[edge]),
+    centerRipple: true,
+    focusRipple: !disableFocusRipple,
+    disabled: disabled,
+    ref: ref
+  }, other), /*#__PURE__*/React.createElement("span", {
+    className: classes.label
+  }, children));
+});
+"development" !== "production" ? IconButton.propTypes = {
+  /**
+   * The icon element.
+   */
+  children: (0, _utils.chainPropTypes)(_propTypes.default.node, function (props) {
+    var found = React.Children.toArray(props.children).some(function (child) {
+      return React.isValidElement(child) && child.props.onClick;
+    });
+
+    if (found) {
+      return new Error(['Material-UI: you are providing an onClick event listener ' + 'to a child of a button element.', 'Firefox will never trigger the event.', 'You should move the onClick listener to the parent button element.', 'https://github.com/mui-org/material-ui/issues/13957'].join('\n'));
+    }
+
+    return null;
+  }),
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */
+  classes: _propTypes.default.object.isRequired,
+
+  /**
+   * @ignore
+   */
+  className: _propTypes.default.string,
+
+  /**
+   * The color of the component. It supports those theme colors that make sense for this component.
+   */
+  color: _propTypes.default.oneOf(['default', 'inherit', 'primary', 'secondary']),
+
+  /**
+   * If `true`, the button will be disabled.
+   */
+  disabled: _propTypes.default.bool,
+
+  /**
+   * If `true`, the  keyboard focus ripple will be disabled.
+   * `disableRipple` must also be true.
+   */
+  disableFocusRipple: _propTypes.default.bool,
+
+  /**
+   * If `true`, the ripple effect will be disabled.
+   */
+  disableRipple: _propTypes.default.bool,
+
+  /**
+   * If given, uses a negative margin to counteract the padding on one
+   * side (this is often helpful for aligning the left or right
+   * side of the icon with content above or below, without ruining the border
+   * size and shape).
+   */
+  edge: _propTypes.default.oneOf(['start', 'end', false]),
+
+  /**
+   * The size of the button.
+   * `small` is equivalent to the dense button styling.
+   */
+  size: _propTypes.default.oneOf(['small', 'medium'])
+} : void 0;
+
+var _default = (0, _withStyles.default)(styles, {
+  name: 'MuiIconButton'
+})(IconButton);
+
+exports.default = _default;
+},{"@babel/runtime/helpers/esm/extends":"../node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutProperties":"../node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js","react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","clsx":"../node_modules/clsx/dist/clsx.m.js","@material-ui/utils":"../node_modules/@material-ui/utils/esm/index.js","../styles/withStyles":"../node_modules/@material-ui/core/esm/styles/withStyles.js","../styles/colorManipulator":"../node_modules/@material-ui/core/esm/styles/colorManipulator.js","../ButtonBase":"../node_modules/@material-ui/core/esm/ButtonBase/index.js","../utils/capitalize":"../node_modules/@material-ui/core/esm/utils/capitalize.js"}],"../node_modules/@material-ui/core/esm/IconButton/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function () {
+    return _IconButton.default;
+  }
+});
+
+var _IconButton = _interopRequireDefault(require("./IconButton"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./IconButton":"../node_modules/@material-ui/core/esm/IconButton/IconButton.js"}],"../node_modules/@material-ui/core/esm/TablePagination/TablePaginationActions.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/extends"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/objectWithoutProperties"));
+
+var React = _interopRequireWildcard(require("react"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _KeyboardArrowLeft = _interopRequireDefault(require("../internal/svg-icons/KeyboardArrowLeft"));
+
+var _KeyboardArrowRight = _interopRequireDefault(require("../internal/svg-icons/KeyboardArrowRight"));
+
+var _useTheme = _interopRequireDefault(require("../styles/useTheme"));
+
+var _IconButton = _interopRequireDefault(require("../IconButton"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @ignore - internal component.
+ */
+var _ref = /*#__PURE__*/React.createElement(_KeyboardArrowRight.default, null);
+
+var _ref2 = /*#__PURE__*/React.createElement(_KeyboardArrowLeft.default, null);
+
+var _ref3 = /*#__PURE__*/React.createElement(_KeyboardArrowLeft.default, null);
+
+var _ref4 = /*#__PURE__*/React.createElement(_KeyboardArrowRight.default, null);
+
+var TablePaginationActions = React.forwardRef(function TablePaginationActions(props, ref) {
+  var backIconButtonProps = props.backIconButtonProps,
+      count = props.count,
+      nextIconButtonProps = props.nextIconButtonProps,
+      onChangePage = props.onChangePage,
+      page = props.page,
+      rowsPerPage = props.rowsPerPage,
+      other = (0, _objectWithoutProperties2.default)(props, ["backIconButtonProps", "count", "nextIconButtonProps", "onChangePage", "page", "rowsPerPage"]);
+  var theme = (0, _useTheme.default)();
+
+  var handleBackButtonClick = function handleBackButtonClick(event) {
+    onChangePage(event, page - 1);
+  };
+
+  var handleNextButtonClick = function handleNextButtonClick(event) {
+    onChangePage(event, page + 1);
+  };
+
+  return /*#__PURE__*/React.createElement("div", (0, _extends2.default)({
+    ref: ref
+  }, other), /*#__PURE__*/React.createElement(_IconButton.default, (0, _extends2.default)({
+    onClick: handleBackButtonClick,
+    disabled: page === 0,
+    color: "inherit"
+  }, backIconButtonProps), theme.direction === 'rtl' ? _ref : _ref2), /*#__PURE__*/React.createElement(_IconButton.default, (0, _extends2.default)({
+    onClick: handleNextButtonClick,
+    disabled: count !== -1 ? page >= Math.ceil(count / rowsPerPage) - 1 : false,
+    color: "inherit"
+  }, nextIconButtonProps), theme.direction === 'rtl' ? _ref3 : _ref4));
+});
+"development" !== "production" ? TablePaginationActions.propTypes = {
+  /**
+   * Props applied to the back arrow [`IconButton`](/api/icon-button/) element.
+   */
+  backIconButtonProps: _propTypes.default.object,
+
+  /**
+   * The total number of rows.
+   */
+  count: _propTypes.default.number.isRequired,
+
+  /**
+   * Props applied to the next arrow [`IconButton`](/api/icon-button/) element.
+   */
+  nextIconButtonProps: _propTypes.default.object,
+
+  /**
+   * Callback fired when the page is changed.
+   *
+   * @param {object} event The event source of the callback.
+   * @param {number} page The page selected.
+   */
+  onChangePage: _propTypes.default.func.isRequired,
+
+  /**
+   * The zero-based index of the current page.
+   */
+  page: _propTypes.default.number.isRequired,
+
+  /**
+   * The number of rows per page.
+   */
+  rowsPerPage: _propTypes.default.number.isRequired
+} : void 0;
+var _default = TablePaginationActions;
+exports.default = _default;
+},{"@babel/runtime/helpers/esm/extends":"../node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutProperties":"../node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js","react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","../internal/svg-icons/KeyboardArrowLeft":"../node_modules/@material-ui/core/esm/internal/svg-icons/KeyboardArrowLeft.js","../internal/svg-icons/KeyboardArrowRight":"../node_modules/@material-ui/core/esm/internal/svg-icons/KeyboardArrowRight.js","../styles/useTheme":"../node_modules/@material-ui/core/esm/styles/useTheme.js","../IconButton":"../node_modules/@material-ui/core/esm/IconButton/index.js"}],"../node_modules/@material-ui/core/esm/TablePagination/TablePagination.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.styles = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/extends"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/esm/objectWithoutProperties"));
+
+var React = _interopRequireWildcard(require("react"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _utils = require("@material-ui/utils");
+
+var _clsx = _interopRequireDefault(require("clsx"));
+
+var _withStyles = _interopRequireDefault(require("../styles/withStyles"));
+
+var _InputBase = _interopRequireDefault(require("../InputBase"));
+
+var _MenuItem = _interopRequireDefault(require("../MenuItem"));
+
+var _Select = _interopRequireDefault(require("../Select"));
+
+var _TableCell = _interopRequireDefault(require("../TableCell"));
+
+var _Toolbar = _interopRequireDefault(require("../Toolbar"));
+
+var _Typography = _interopRequireDefault(require("../Typography"));
+
+var _TablePaginationActions = _interopRequireDefault(require("./TablePaginationActions"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var styles = function styles(theme) {
+  return {
+    /* Styles applied to the root element. */
+    root: {
+      color: theme.palette.text.primary,
+      fontSize: theme.typography.pxToRem(14),
+      overflow: 'auto',
+      // Increase the specificity to override TableCell.
+      '&:last-child': {
+        padding: 0
+      }
+    },
+
+    /* Styles applied to the Toolbar component. */
+    toolbar: {
+      minHeight: 52,
+      paddingRight: 2
+    },
+
+    /* Styles applied to the spacer element. */
+    spacer: {
+      flex: '1 1 100%'
+    },
+
+    /* Styles applied to the caption Typography components if `variant="caption"`. */
+    caption: {
+      flexShrink: 0
+    },
+    // TODO v5: `.selectRoot` should be merged with `.input`
+
+    /* Styles applied to the Select component root element. */
+    selectRoot: {
+      marginRight: 32,
+      marginLeft: 8
+    },
+
+    /* Styles applied to the Select component `select` class. */
+    select: {
+      paddingLeft: 8,
+      paddingRight: 24,
+      textAlign: 'right',
+      textAlignLast: 'right' // Align <select> on Chrome.
+
+    },
+    // TODO v5: remove
+
+    /* Styles applied to the Select component `icon` class. */
+    selectIcon: {},
+
+    /* Styles applied to the `InputBase` component. */
+    input: {
+      color: 'inherit',
+      fontSize: 'inherit',
+      flexShrink: 0
+    },
+
+    /* Styles applied to the MenuItem component. */
+    menuItem: {},
+
+    /* Styles applied to the internal `TablePaginationActions` component. */
+    actions: {
+      flexShrink: 0,
+      marginLeft: 20
+    }
+  };
+};
+
+exports.styles = styles;
+
+var defaultLabelDisplayedRows = function defaultLabelDisplayedRows(_ref) {
+  var from = _ref.from,
+      to = _ref.to,
+      count = _ref.count;
+  return "".concat(from, "-").concat(to === -1 ? count : to, " of ").concat(count !== -1 ? count : "more than ".concat(to));
+};
+
+var defaultRowsPerPageOptions = [10, 25, 50, 100];
+/**
+ * A `TableCell` based component for placing inside `TableFooter` for pagination.
+ */
+
+var TablePagination = React.forwardRef(function TablePagination(props, ref) {
+  var _props$ActionsCompone = props.ActionsComponent,
+      ActionsComponent = _props$ActionsCompone === void 0 ? _TablePaginationActions.default : _props$ActionsCompone,
+      backIconButtonProps = props.backIconButtonProps,
+      _props$backIconButton = props.backIconButtonText,
+      backIconButtonText = _props$backIconButton === void 0 ? 'Previous page' : _props$backIconButton,
+      classes = props.classes,
+      className = props.className,
+      colSpanProp = props.colSpan,
+      _props$component = props.component,
+      Component = _props$component === void 0 ? _TableCell.default : _props$component,
+      count = props.count,
+      _props$labelDisplayed = props.labelDisplayedRows,
+      labelDisplayedRows = _props$labelDisplayed === void 0 ? defaultLabelDisplayedRows : _props$labelDisplayed,
+      _props$labelRowsPerPa = props.labelRowsPerPage,
+      labelRowsPerPage = _props$labelRowsPerPa === void 0 ? 'Rows per page:' : _props$labelRowsPerPa,
+      nextIconButtonProps = props.nextIconButtonProps,
+      _props$nextIconButton = props.nextIconButtonText,
+      nextIconButtonText = _props$nextIconButton === void 0 ? 'Next page' : _props$nextIconButton,
+      onChangePage = props.onChangePage,
+      onChangeRowsPerPage = props.onChangeRowsPerPage,
+      page = props.page,
+      rowsPerPage = props.rowsPerPage,
+      _props$rowsPerPageOpt = props.rowsPerPageOptions,
+      rowsPerPageOptions = _props$rowsPerPageOpt === void 0 ? defaultRowsPerPageOptions : _props$rowsPerPageOpt,
+      _props$SelectProps = props.SelectProps,
+      SelectProps = _props$SelectProps === void 0 ? {} : _props$SelectProps,
+      other = (0, _objectWithoutProperties2.default)(props, ["ActionsComponent", "backIconButtonProps", "backIconButtonText", "classes", "className", "colSpan", "component", "count", "labelDisplayedRows", "labelRowsPerPage", "nextIconButtonProps", "nextIconButtonText", "onChangePage", "onChangeRowsPerPage", "page", "rowsPerPage", "rowsPerPageOptions", "SelectProps"]);
+  var colSpan;
+
+  if (Component === _TableCell.default || Component === 'td') {
+    colSpan = colSpanProp || 1000; // col-span over everything
+  }
+
+  var MenuItemComponent = SelectProps.native ? 'option' : _MenuItem.default;
+  return /*#__PURE__*/React.createElement(Component, (0, _extends2.default)({
+    className: (0, _clsx.default)(classes.root, className),
+    colSpan: colSpan,
+    ref: ref
+  }, other), /*#__PURE__*/React.createElement(_Toolbar.default, {
+    className: classes.toolbar
+  }, /*#__PURE__*/React.createElement("div", {
+    className: classes.spacer
+  }), rowsPerPageOptions.length > 1 && /*#__PURE__*/React.createElement(_Typography.default, {
+    color: "inherit",
+    variant: "body2",
+    className: classes.caption
+  }, labelRowsPerPage), rowsPerPageOptions.length > 1 && /*#__PURE__*/React.createElement(_Select.default, (0, _extends2.default)({
+    classes: {
+      select: classes.select,
+      icon: classes.selectIcon
+    },
+    input: /*#__PURE__*/React.createElement(_InputBase.default, {
+      className: (0, _clsx.default)(classes.input, classes.selectRoot)
+    }),
+    value: rowsPerPage,
+    onChange: onChangeRowsPerPage,
+    inputProps: {
+      'aria-label': labelRowsPerPage
+    }
+  }, SelectProps), rowsPerPageOptions.map(function (rowsPerPageOption) {
+    return /*#__PURE__*/React.createElement(MenuItemComponent, {
+      className: classes.menuItem,
+      key: rowsPerPageOption.value ? rowsPerPageOption.value : rowsPerPageOption,
+      value: rowsPerPageOption.value ? rowsPerPageOption.value : rowsPerPageOption
+    }, rowsPerPageOption.label ? rowsPerPageOption.label : rowsPerPageOption);
+  })), /*#__PURE__*/React.createElement(_Typography.default, {
+    color: "inherit",
+    variant: "body2",
+    className: classes.caption
+  }, labelDisplayedRows({
+    from: count === 0 ? 0 : page * rowsPerPage + 1,
+    to: count !== -1 ? Math.min(count, (page + 1) * rowsPerPage) : (page + 1) * rowsPerPage,
+    count: count,
+    page: page
+  })), /*#__PURE__*/React.createElement(ActionsComponent, {
+    className: classes.actions,
+    backIconButtonProps: (0, _extends2.default)({
+      title: backIconButtonText,
+      'aria-label': backIconButtonText
+    }, backIconButtonProps),
+    count: count,
+    nextIconButtonProps: (0, _extends2.default)({
+      title: nextIconButtonText,
+      'aria-label': nextIconButtonText
+    }, nextIconButtonProps),
+    onChangePage: onChangePage,
+    page: page,
+    rowsPerPage: rowsPerPage
+  })));
+});
+"development" !== "production" ? TablePagination.propTypes = {
+  /**
+   * The component used for displaying the actions.
+   * Either a string to use a DOM element or a component.
+   */
+  ActionsComponent: _propTypes.default.elementType,
+
+  /**
+   * Props applied to the back arrow [`IconButton`](/api/icon-button/) component.
+   */
+  backIconButtonProps: _propTypes.default.object,
+
+  /**
+   * Text label for the back arrow icon button.
+   *
+   * For localization purposes, you can use the provided [translations](/guides/localization/).
+   */
+  backIconButtonText: _propTypes.default.string,
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */
+  classes: _propTypes.default.object.isRequired,
+
+  /**
+   * @ignore
+   */
+  className: _propTypes.default.string,
+
+  /**
+   * @ignore
+   */
+  colSpan: _propTypes.default.number,
+
+  /**
+   * The component used for the root node.
+   * Either a string to use a DOM element or a component.
+   */
+  component: _propTypes.default.elementType,
+
+  /**
+   * The total number of rows.
+   *
+   * To enable server side pagination for an unknown number of items, provide -1.
+   */
+  count: _propTypes.default.number.isRequired,
+
+  /**
+   * Customize the displayed rows label. Invoked with a `{ from, to, count, page }`
+   * object.
+   *
+   * For localization purposes, you can use the provided [translations](/guides/localization/).
+   */
+  labelDisplayedRows: _propTypes.default.func,
+
+  /**
+   * Customize the rows per page label.
+   *
+   * For localization purposes, you can use the provided [translations](/guides/localization/).
+   */
+  labelRowsPerPage: _propTypes.default.node,
+
+  /**
+   * Props applied to the next arrow [`IconButton`](/api/icon-button/) element.
+   */
+  nextIconButtonProps: _propTypes.default.object,
+
+  /**
+   * Text label for the next arrow icon button.
+   *
+   * For localization purposes, you can use the provided [translations](/guides/localization/).
+   */
+  nextIconButtonText: _propTypes.default.string,
+
+  /**
+   * Callback fired when the page is changed.
+   *
+   * @param {object} event The event source of the callback.
+   * @param {number} page The page selected.
+   */
+  onChangePage: _propTypes.default.func.isRequired,
+
+  /**
+   * Callback fired when the number of rows per page is changed.
+   *
+   * @param {object} event The event source of the callback.
+   */
+  onChangeRowsPerPage: _propTypes.default.func,
+
+  /**
+   * The zero-based index of the current page.
+   */
+  page: (0, _utils.chainPropTypes)(_propTypes.default.number.isRequired, function (props) {
+    var count = props.count,
+        page = props.page,
+        rowsPerPage = props.rowsPerPage;
+
+    if (count === -1) {
+      return null;
+    }
+
+    var newLastPage = Math.max(0, Math.ceil(count / rowsPerPage) - 1);
+
+    if (page < 0 || page > newLastPage) {
+      return new Error('Material-UI: the page prop of a TablePagination is out of range ' + "(0 to ".concat(newLastPage, ", but page is ").concat(page, ")."));
+    }
+
+    return null;
+  }),
+
+  /**
+   * The number of rows per page.
+   */
+  rowsPerPage: _propTypes.default.number.isRequired,
+
+  /**
+   * Customizes the options of the rows per page select field. If less than two options are
+   * available, no select field will be displayed.
+   */
+  rowsPerPageOptions: _propTypes.default.array,
+
+  /**
+   * Props applied to the rows per page [`Select`](/api/select/) element.
+   */
+  SelectProps: _propTypes.default.object
+} : void 0;
+
+var _default = (0, _withStyles.default)(styles, {
+  name: 'MuiTablePagination'
+})(TablePagination);
+
+exports.default = _default;
+},{"@babel/runtime/helpers/esm/extends":"../node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutProperties":"../node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js","react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","@material-ui/utils":"../node_modules/@material-ui/utils/esm/index.js","clsx":"../node_modules/clsx/dist/clsx.m.js","../styles/withStyles":"../node_modules/@material-ui/core/esm/styles/withStyles.js","../InputBase":"../node_modules/@material-ui/core/esm/InputBase/index.js","../MenuItem":"../node_modules/@material-ui/core/esm/MenuItem/index.js","../Select":"../node_modules/@material-ui/core/esm/Select/index.js","../TableCell":"../node_modules/@material-ui/core/esm/TableCell/index.js","../Toolbar":"../node_modules/@material-ui/core/esm/Toolbar/index.js","../Typography":"../node_modules/@material-ui/core/esm/Typography/index.js","./TablePaginationActions":"../node_modules/@material-ui/core/esm/TablePagination/TablePaginationActions.js"}],"../node_modules/@material-ui/core/esm/TablePagination/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function () {
+    return _TablePagination.default;
+  }
+});
+
+var _TablePagination = _interopRequireDefault(require("./TablePagination"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./TablePagination":"../node_modules/@material-ui/core/esm/TablePagination/TablePagination.js"}],"components/SingleProductRow.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _reactRedux = require("react-redux");
+
+var _deleteProduct = require("../actions/deleteProduct");
+
+var _TableRow = _interopRequireDefault(require("@material-ui/core/TableRow"));
+
+var _TableCell = _interopRequireDefault(require("@material-ui/core/TableCell"));
+
+var _Button = _interopRequireDefault(require("@material-ui/core/Button"));
+
+var _TextField = _interopRequireDefault(require("@material-ui/core/TextField"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var SingleProductRow = function SingleProductRow(props) {
+  var _useState = (0, _react.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      updateButtonClick = _useState2[0],
+      setUpdateButtonClick = _useState2[1];
+
+  var singleProduct = props.singleProduct,
+      calculatedProductPrice = props.calculatedProductPrice,
+      sellingPrice = props.sellingPrice,
+      storeFee = props.storeFee,
+      tax = props.tax,
+      calculatedShipping = props.calculatedShipping,
+      newShipping = props.newShipping,
+      profit = props.profit;
+  var updatedProduct = {
+    brand: '',
+    productName: '',
+    price: 0,
+    lowSize: 0,
+    highSize: 0,
+    siteName: '',
+    availableSizes: [],
+    url: '',
+    shippingFee: 0,
+    updatedDate: ''
+  }; // useEffect(() => {
+  // }, [])
+  // const [brandClick, setBrandClick] = useState(false);
+
+  var numberWithCommas = function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
+  var handleUpdateClick = function handleUpdateClick(e) {
+    console.log('@@@@ got here');
+    setUpdateButtonClick(!updateButtonClick);
+  }; // const handleFieldClick = (e, fieldName) => {
+  //   console.log("!@%#^$^&#@");
+  //   if(fieldName === 'brand') {
+  //     setBrandClick(!brandClick);
+  //     console.log("~~~ got here", brandClick);
+  //   }
+  // }
+
+
+  var handleTextFieldChange = function handleTextFieldChange(event, fieldName) {
+    console.log("@#!$% got here");
+  }; // const handleTextFieldChange = (event, textfieldName) => {
+  //   if(textfieldName === 'Brand Name') {
+  //     setBrand(event.target.value);
+  //   } else if(textfieldName === 'Product Name') {
+  //     setProductName(event.target.value);
+  //   } else if(textfieldName === 'Price') {
+  //     setPrice(event.target.value);
+  //   } else if(textfieldName === 'Product URL') {
+  //     setUrl(event.target.value);
+  //   }
+  // }
+
+
+  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_TableRow.default, null, _react.default.createElement(_TableCell.default, {
+    align: "center",
+    scope: "row"
+  }, singleProduct.id), _react.default.createElement(_TableCell.default, {
+    align: "center",
+    scope: "row" // onClick={(e) => handleFieldClick(e, 'brand')}
+
+  }, _react.default.createElement(_TextField.default // id="standard-basic" 
+  // label="Brand Name"
+  , {
+    variant: "outlined",
+    defaultValue: singleProduct.brand,
+    onChange: function onChange(e) {
+      return handleTextFieldChange(e, "brand");
+    },
+    inputProps: {
+      style: {
+        textAlign: 'center'
+      }
+    }
+  })), _react.default.createElement(_TableCell.default, {
+    align: "center",
+    scope: "row"
+  }, singleProduct.productName), _react.default.createElement(_TableCell.default, {
+    align: "center",
+    scope: "row"
+  }, "$".concat(singleProduct.price)), _react.default.createElement(_TableCell.default, {
+    align: "center",
+    scope: "row"
+  }, "".concat(numberWithCommas(calculatedProductPrice), " \uC6D0")), _react.default.createElement(_TableCell.default, {
+    align: "center",
+    scope: "row"
+  }, "".concat(numberWithCommas(sellingPrice), " \uC6D0")), _react.default.createElement(_TableCell.default, {
+    align: "center",
+    scope: "row"
+  }, "".concat(numberWithCommas(storeFee), " \uC6D0")), _react.default.createElement(_TableCell.default, {
+    align: "center",
+    scope: "row"
+  }, "".concat(numberWithCommas(tax), " \uC6D0")), _react.default.createElement(_TableCell.default, {
+    align: "center",
+    scope: "row"
+  }, singleProduct.siteName), _react.default.createElement(_TableCell.default, {
+    align: "center",
+    scope: "row"
+  }, singleProduct.availableSizes), _react.default.createElement(_TableCell.default, {
+    align: "center",
+    scope: "row"
+  }, singleProduct.url), _react.default.createElement(_TableCell.default, {
+    align: "center",
+    scope: "row"
+  }, "$".concat(singleProduct.shippingFee)), _react.default.createElement(_TableCell.default, {
+    align: "center",
+    scope: "row"
+  }, "".concat(numberWithCommas(calculatedShipping), " \uC6D0")), _react.default.createElement(_TableCell.default, {
+    align: "center",
+    scope: "row"
+  }, "".concat(numberWithCommas(newShipping), " \uC6D0")), _react.default.createElement(_TableCell.default, {
+    align: "center",
+    scope: "row"
+  }, "".concat(numberWithCommas(profit), " \uC6D0")), _react.default.createElement(_TableCell.default, null, _react.default.createElement(_Button.default, {
+    style: {
+      display: 'inline-block'
+    },
+    variant: "contained",
+    color: "secondary",
+    onClick: function onClick() {
+      return props.deleteProduct(singleProduct.id);
+    }
+  }, "DELETE")), _react.default.createElement(_TableCell.default, null, _react.default.createElement(_Button.default, {
+    style: {
+      display: 'inline-block'
+    },
+    variant: "contained",
+    color: "primary",
+    onClick: function onClick(e) {
+      return handleUpdateClick();
+    } // onClick={() => props.deleteProduct(singleProduct.id)}
+
+  }, "UPDATE"))), updateButtonClick && _react.default.createElement(_TableRow.default, null, _react.default.createElement(_TableCell.default, {
+    align: "center",
+    scope: "row"
+  }, singleProduct.id)));
+};
+
+var mapStateToProps = function mapStateToProps(state, props) {
+  return {// productList: state.productList,
+    // newProduct: state.newProduct
+  };
+};
+
+var _default = (0, _reactRedux.connect)(mapStateToProps, {
+  deleteProduct: _deleteProduct.deleteProduct
+})(SingleProductRow);
+
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","../actions/deleteProduct":"actions/deleteProduct.js","@material-ui/core/TableRow":"../node_modules/@material-ui/core/esm/TableRow/index.js","@material-ui/core/TableCell":"../node_modules/@material-ui/core/esm/TableCell/index.js","@material-ui/core/Button":"../node_modules/@material-ui/core/esm/Button/index.js","@material-ui/core/TextField":"../node_modules/@material-ui/core/esm/TextField/index.js"}],"components/productList.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _reactRedux = require("react-redux");
+
+var _productList = require("../actions/productList");
+
+var _deleteProduct = require("../actions/deleteProduct");
+
+var _styles = require("@material-ui/core/styles");
+
+var _Table = _interopRequireDefault(require("@material-ui/core/Table"));
+
+var _TableBody = _interopRequireDefault(require("@material-ui/core/TableBody"));
+
+var _TableCell = _interopRequireDefault(require("@material-ui/core/TableCell"));
+
+var _TableContainer = _interopRequireDefault(require("@material-ui/core/TableContainer"));
+
+var _TableHead = _interopRequireDefault(require("@material-ui/core/TableHead"));
+
+var _TableRow = _interopRequireDefault(require("@material-ui/core/TableRow"));
+
+var _Paper = _interopRequireDefault(require("@material-ui/core/Paper"));
+
+var _TablePagination = _interopRequireDefault(require("@material-ui/core/TablePagination"));
+
+var _Button = _interopRequireDefault(require("@material-ui/core/Button"));
+
+var _SingleProductRow = _interopRequireDefault(require("./SingleProductRow"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var useStyles = (0, _styles.makeStyles)({
+  table: {
+    minWidth: 2000
+  }
+});
+
+var ProductList = function ProductList(props) {
+  var classes = useStyles();
+
+  var _useState = (0, _react.useState)({}),
+      _useState2 = _slicedToArray(_useState, 2),
+      newProduct = _useState2[0],
+      setNewProduct = _useState2[1];
+
+  var _React$useState = _react.default.useState(0),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      page = _React$useState2[0],
+      setPage = _React$useState2[1];
+
+  var _React$useState3 = _react.default.useState(10),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      rowsPerPage = _React$useState4[0],
+      setRowsPerPage = _React$useState4[1];
+
+  var handleChangePage = function handleChangePage(event, newPage) {
+    setPage(newPage);
+  };
+
+  var handleChangeRowsPerPage = function handleChangeRowsPerPage(event) {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
+  (0, _react.useEffect)(function () {
+    props.fetchAllProducts();
+  }, []);
+  (0, _react.useEffect)(function () {
+    setNewProduct(props.newProduct);
+  }, [props.newProduct]);
+
+  var numberWithCommas = function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
+  return _react.default.createElement("div", {
+    className: "product-list"
+  }, _react.default.createElement("h1", {
+    style: {
+      marginTop: '64px'
+    }
+  }, "Product List"), _react.default.createElement(_TableContainer.default, {
+    component: _Paper.default
+  }, _react.default.createElement(_Table.default, {
+    stickyHeader: true,
+    className: classes.table,
+    "aria-label": "simple table"
+  }, _react.default.createElement(_TableHead.default, null, _react.default.createElement(_TableRow.default, null, _react.default.createElement(_TableCell.default, {
+    component: "th",
+    align: "center",
+    width: "68px"
+  }, "Product ID"), _react.default.createElement(_TableCell.default, {
+    component: "th",
+    align: "center"
+  }, "Brand"), _react.default.createElement(_TableCell.default, {
+    component: "th",
+    align: "center"
+  }, "Product Name"), _react.default.createElement(_TableCell.default, {
+    component: "th",
+    align: "center"
+  }, "Product Price ($)"), _react.default.createElement(_TableCell.default, {
+    component: "th",
+    align: "center"
+  }, "Product Price (\u20A9)"), _react.default.createElement(_TableCell.default, {
+    component: "th",
+    align: "center"
+  }, "Selling Price (\u20A9)"), _react.default.createElement(_TableCell.default, {
+    component: "th",
+    align: "center"
+  }, "Store Fee (\u20A9)"), _react.default.createElement(_TableCell.default, {
+    component: "th",
+    align: "center"
+  }, "Tax (\u20A9)"), _react.default.createElement(_TableCell.default, {
+    component: "th",
+    align: "center"
+  }, "Site Name"), _react.default.createElement(_TableCell.default, {
+    component: "th",
+    align: "center"
+  }, "Available Sizes"), _react.default.createElement(_TableCell.default, {
+    component: "th",
+    align: "center"
+  }, "Product URL"), _react.default.createElement(_TableCell.default, {
+    component: "th",
+    align: "center"
+  }, "Shipping Fee"), _react.default.createElement(_TableCell.default, {
+    component: "th",
+    align: "center"
+  }, "Shipping Fee (\u20A9)"), _react.default.createElement(_TableCell.default, {
+    component: "th",
+    align: "center"
+  }, "New Shipping Fee (\u20A9)"), _react.default.createElement(_TableCell.default, {
+    component: "th",
+    align: "center"
+  }, "Profit (\u20A9)"), _react.default.createElement(_TableCell.default, {
+    component: "th",
+    align: "center"
+  }), _react.default.createElement(_TableCell.default, {
+    component: "th",
+    align: "center"
+  }))), _react.default.createElement(_TableBody.default, null, newProduct.brand !== '' && _react.default.createElement(_TableRow.default, null, _react.default.createElement(_TableCell.default, {
+    align: "center",
+    scope: "row"
+  }, newProduct.id), _react.default.createElement(_TableCell.default, {
+    align: "center",
+    scope: "row"
+  }, newProduct.brand), _react.default.createElement(_TableCell.default, {
+    align: "center",
+    scope: "row"
+  }, newProduct.productName), _react.default.createElement(_TableCell.default, {
+    align: "center",
+    scope: "row"
+  }, "$".concat(newProduct.price)), _react.default.createElement(_TableCell.default, {
+    align: "center",
+    scope: "row"
+  }, newProduct.lowSize), _react.default.createElement(_TableCell.default, {
+    align: "center",
+    scope: "row"
+  }, newProduct.highSize), _react.default.createElement(_TableCell.default, {
+    align: "center",
+    scope: "row"
+  }, newProduct.siteName), _react.default.createElement(_TableCell.default, {
+    align: "center",
+    scope: "row"
+  }, newProduct.availableSizes), _react.default.createElement(_TableCell.default, {
+    align: "center",
+    scope: "row"
+  }, newProduct.url), _react.default.createElement(_TableCell.default, {
+    align: "center",
+    scope: "row"
+  }, "$".concat(newProduct.shippingFee))), Object.keys(props.productList).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(function (index) {
+    // Object.keys(props.productList).map((index) => {
+    var singleProduct = props.productList[index];
+    var calculatedProductPrice = singleProduct.price * 1250;
+    var sellingPrice = calculatedProductPrice * 1.2;
+    var storeFee = sellingPrice * 0.057;
+    var tax = sellingPrice * 0.1;
+    var calculatedShipping = singleProduct.shippingFee * 1250;
+    var newShipping = 29900;
+    var profit = sellingPrice - calculatedProductPrice - storeFee - tax + (newShipping - calculatedShipping);
+    return _react.default.createElement(_SingleProductRow.default, {
+      key: index,
+      singleProduct: singleProduct,
+      calculatedProductPrice: calculatedProductPrice,
+      sellingPrice: sellingPrice,
+      storeFee: storeFee,
+      tax: tax,
+      calculatedShipping: calculatedShipping,
+      newShipping: newShipping,
+      profit: profit
+    });
+  })))), _react.default.createElement(_TablePagination.default, {
+    rowsPerPageOptions: [10, 25, 100],
+    component: "div",
+    count: Object.keys(props.productList).length,
+    rowsPerPage: rowsPerPage,
+    page: page,
+    onChangePage: handleChangePage,
+    onChangeRowsPerPage: handleChangeRowsPerPage
+  }));
+};
+
+var mapStateToProps = function mapStateToProps(state, props) {
+  return {
+    productList: state.productList,
+    newProduct: state.newProduct
+  };
+};
+
+var _default = (0, _reactRedux.connect)(mapStateToProps, {
+  fetchAllProducts: _productList.fetchAllProducts,
+  deleteProduct: _deleteProduct.deleteProduct
+})(ProductList);
+
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","../actions/productList":"actions/productList.js","../actions/deleteProduct":"actions/deleteProduct.js","@material-ui/core/styles":"../node_modules/@material-ui/core/esm/styles/index.js","@material-ui/core/Table":"../node_modules/@material-ui/core/esm/Table/index.js","@material-ui/core/TableBody":"../node_modules/@material-ui/core/esm/TableBody/index.js","@material-ui/core/TableCell":"../node_modules/@material-ui/core/esm/TableCell/index.js","@material-ui/core/TableContainer":"../node_modules/@material-ui/core/esm/TableContainer/index.js","@material-ui/core/TableHead":"../node_modules/@material-ui/core/esm/TableHead/index.js","@material-ui/core/TableRow":"../node_modules/@material-ui/core/esm/TableRow/index.js","@material-ui/core/Paper":"../node_modules/@material-ui/core/esm/Paper/index.js","@material-ui/core/TablePagination":"../node_modules/@material-ui/core/esm/TablePagination/index.js","@material-ui/core/Button":"../node_modules/@material-ui/core/esm/Button/index.js","./SingleProductRow":"components/SingleProductRow.js"}],"components/product.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -57729,11 +61657,7 @@ var _reactRedux = require("react-redux");
 
 var _product = require("../actions/product");
 
-var _productList = require("../actions/productList");
-
 var _newProduct = require("../actions/newProduct");
-
-var _deleteProduct = require("../actions/deleteProduct");
 
 var _Button = _interopRequireDefault(require("@material-ui/core/Button"));
 
@@ -57756,6 +61680,8 @@ var _lowestSize = _interopRequireDefault(require("./lowestSize"));
 var _highestSize = _interopRequireDefault(require("./highestSize"));
 
 var _shippingFee = _interopRequireDefault(require("./shippingFee"));
+
+var _productList = _interopRequireDefault(require("./productList"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -57785,7 +61711,8 @@ var Product = function Product(props) {
     siteName: '',
     availableSizes: [],
     url: '',
-    shippingFee: 0
+    shippingFee: 0,
+    updatedDate: ''
   };
   var availableSizes = [];
   var sizes = [3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 13.5, 15];
@@ -57951,6 +61878,7 @@ var Product = function Product(props) {
       addingProduct.siteName = siteName;
       addingProduct.url = url;
       addingProduct.shippingFee = shippingFee;
+      addingProduct.updatedDate = new Date().toLocaleString();
       console.log("********** got here addingProduct", addingProduct);
       props.postNewProduct(addingProduct);
     }
@@ -57974,27 +61902,12 @@ var Product = function Product(props) {
     onClick: function onClick() {
       return props.fetchProduct();
     }
-  }, "New Product"), _react.default.createElement("h2", null, "Get Product List"), _react.default.createElement(_Button.default, {
-    variant: "contained",
-    onClick: function onClick() {
-      return props.fetchAllProducts();
-    }
-  }, "Get Product List"), _react.default.createElement("h2", null, "Post New Product"), _react.default.createElement(_Button.default, {
+  }, "New Product"), _react.default.createElement("h2", null, "Post New Product"), _react.default.createElement(_Button.default, {
     variant: "contained",
     onClick: function onClick() {
       return postProduct();
     }
-  }, "Post New Product"), _react.default.createElement("h2", null, "Delete Product"), _react.default.createElement(_Button.default, {
-    variant: "contained",
-    onClick: function onClick() {
-      return props.deleteProduct(32);
-    }
-  }, "Delete a product"), Object.keys(props.productList).map(function (index) {
-    var singleProduct = props.productList[index];
-    return _react.default.createElement("div", {
-      key: index
-    }, _react.default.createElement("p", null, singleProduct.brand));
-  }), _react.default.createElement("form", {
+  }, "Post New Product"), _react.default.createElement("form", {
     noValidate: true,
     autoComplete: "off",
     style: {
@@ -58074,7 +61987,7 @@ var Product = function Product(props) {
       size: size,
       collectAvailableSizes: collectAvailableSizes
     });
-  })));
+  })), _react.default.createElement(_productList.default, null));
 };
 
 var mapStateToProps = function mapStateToProps(state, props) {
@@ -58088,13 +62001,11 @@ var mapStateToProps = function mapStateToProps(state, props) {
 
 var _default = (0, _reactRedux.connect)(mapStateToProps, {
   fetchProduct: _product.fetchProduct,
-  fetchAllProducts: _productList.fetchAllProducts,
-  postNewProduct: _newProduct.postNewProduct,
-  deleteProduct: _deleteProduct.deleteProduct
+  postNewProduct: _newProduct.postNewProduct
 })(Product);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","../actions/product":"actions/product.js","../actions/productList":"actions/productList.js","../actions/newProduct":"actions/newProduct.js","../actions/deleteProduct":"actions/deleteProduct.js","@material-ui/core/Button":"../node_modules/@material-ui/core/esm/Button/index.js","@material-ui/core/TextField":"../node_modules/@material-ui/core/esm/TextField/index.js","@material-ui/core/InputAdornment":"../node_modules/@material-ui/core/esm/InputAdornment/index.js","@material-ui/core/MenuItem":"../node_modules/@material-ui/core/esm/MenuItem/index.js","react-number-format":"../node_modules/react-number-format/dist/react-number-format.es.js","./singleAvailableSize":"components/singleAvailableSize.js","../config":"config.js","./siteName":"components/siteName.js","./lowestSize":"components/lowestSize.js","./highestSize":"components/highestSize.js","./shippingFee":"components/shippingFee.js"}],"reducers/fetchStates.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","../actions/product":"actions/product.js","../actions/newProduct":"actions/newProduct.js","@material-ui/core/Button":"../node_modules/@material-ui/core/esm/Button/index.js","@material-ui/core/TextField":"../node_modules/@material-ui/core/esm/TextField/index.js","@material-ui/core/InputAdornment":"../node_modules/@material-ui/core/esm/InputAdornment/index.js","@material-ui/core/MenuItem":"../node_modules/@material-ui/core/esm/MenuItem/index.js","react-number-format":"../node_modules/react-number-format/dist/react-number-format.es.js","./singleAvailableSize":"components/singleAvailableSize.js","../config":"config.js","./siteName":"components/siteName.js","./lowestSize":"components/lowestSize.js","./highestSize":"components/highestSize.js","./shippingFee":"components/shippingFee.js","./productList":"components/productList.js"}],"reducers/fetchStates.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -58199,9 +62110,7 @@ var productList = function productList() {
 
   switch (action.type) {
     case _types.PRODUCT_LIST.FETCH:
-      return _extends({}, state, {
-        status: _fetchStates.default.fetching
-      });
+      return _extends({}, state);
 
     case _types.PRODUCT_LIST.FETCH_ERROR:
       return _extends({}, state, {
@@ -58211,9 +62120,7 @@ var productList = function productList() {
 
     case _types.PRODUCT_LIST.FETCH_SUCCESS:
       // return { ...state, allProducts: action.allProducts }
-      return _extends({}, state, {
-        status: _fetchStates.default.success
-      }, action.allProducts);
+      return _extends({}, state, action.allProducts);
 
     default:
       return state;
@@ -58480,7 +62387,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61047" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59843" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

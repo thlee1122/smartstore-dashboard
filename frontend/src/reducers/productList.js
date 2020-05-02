@@ -17,12 +17,12 @@ import fetchStates from './fetchStates';
 const productList = (state = [], action) => {
 	switch(action.type) {
 		case PRODUCT_LIST.FETCH:
-			return { ...state, status: fetchStates.fetching } ;
+			return { ...state } ;
 		case PRODUCT_LIST.FETCH_ERROR:
 			return { ...state, status: fetchStates.error, message: action.message }
 		case PRODUCT_LIST.FETCH_SUCCESS:
 			// return { ...state, allProducts: action.allProducts }
-			return { ...state, status: fetchStates.success, ...action.allProducts }
+			return { ...state, ...action.allProducts }
 		default:
 			return state;
 	}
